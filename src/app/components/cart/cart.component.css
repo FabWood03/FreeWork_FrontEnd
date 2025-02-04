@@ -31,7 +31,7 @@
   border: none;
 }
 
-.photo{
+.photo {
   width: 280px;
   height: 180px;
   position: relative;
@@ -46,12 +46,12 @@
   color: #c80404;
 }
 
-.bottom-line, .upper-line{
+.bottom-line, .upper-line {
   width: auto;
   border: 2px rgba(45, 64, 78, 0.20) solid
 }
 
-.total{
+.total {
   background-color: #F2F2F2;
 }
 

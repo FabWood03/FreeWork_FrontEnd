@@ -28,7 +28,8 @@ export class ReviewComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private ticketService: TicketService,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     const loggedInUserEmail = this.authService.getUserLoggedEmail();
@@ -59,7 +60,7 @@ export class ReviewComponent implements OnInit {
   }
 
   goToSellerProfile(userId: number): void {
-    this.router.navigate(['/sellerProfile'], { state: { userId } });
+    this.router.navigate(['/sellerProfile'], {state: {userId}});
   }
 
   handleReportSubmit(data: { title: string, description: string, reviewId?: number }) {

@@ -15,7 +15,8 @@ export class CartService {
   constructor(
     private http: HttpClient,
     private errorUtils: ErrorUtils
-  ) {}
+  ) {
+  }
 
   private handleError(error: any, context: string): Observable<never> {
     this.errorUtils.showHttpError(error, context);
@@ -23,7 +24,7 @@ export class CartService {
   }
 
   findByUserId(): Observable<CartResponseDTO> {
-    return this.http.get<CartResponseDTO> (`${this.baseUrl}/findByUserId`).pipe(
+    return this.http.get<CartResponseDTO>(`${this.baseUrl}/findByUserId`).pipe(
       map((response: CartResponseDTO) => {
         return response;
       }),
@@ -40,7 +41,7 @@ export class CartService {
     );
   }
 
-  addToCart(purchasedProduct: PurchasedProductRequestDTO): Observable<PurchasedProductResponseDTO>{
+  addToCart(purchasedProduct: PurchasedProductRequestDTO): Observable<PurchasedProductResponseDTO> {
     return this.http.post<PurchasedProductResponseDTO>(`${this.baseUrl}/addPurchasedProduct`, purchasedProduct).pipe(
       map((response: PurchasedProductResponseDTO) => {
         return response;

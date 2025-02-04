@@ -8,7 +8,9 @@ export class ReviewPagination {
   reviews: ReviewResponseDTO[] = [];
   hasMoreReviews: boolean = true;
 
-  constructor(size: number = 5) {
+  constructor(
+    size: number = 5
+  ) {
     this.size = size;
   }
 

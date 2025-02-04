@@ -82,10 +82,6 @@
 }
 
 .categories-container {
-  /*display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -2rem;*/
   width: 60vw;
   margin: auto;
   overflow: auto;
@@ -185,11 +181,11 @@
   background-color: #f0f0f0;
 }
 
-.initial-title{
+.initial-title {
   font-size: 3rem;
 }
 
-.prova{
+.prova {
   height: 4rem
 }
 

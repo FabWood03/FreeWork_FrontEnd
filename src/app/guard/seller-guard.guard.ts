@@ -14,7 +14,8 @@ export class SellerGuard implements CanActivate {
     private authService: AuthService,
     private userService: UserService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   canActivate(): Observable<boolean | UrlTree> {
     const userEmail = this.authService.getUserLoggedEmail();

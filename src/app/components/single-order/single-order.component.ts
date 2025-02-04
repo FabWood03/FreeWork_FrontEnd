@@ -8,7 +8,7 @@ import {environment} from '../../../environment';
   styleUrls: ['./single-order.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class SingleOrderComponent{
+export class SingleOrderComponent {
   @Input() singleOrder!: OrderResponseDTO;
   @Input() visible: boolean = false;
   @Output() dialogToggle = new EventEmitter<{ visible: boolean, productId: number }>();
@@ -22,6 +22,6 @@ export class SingleOrderComponent{
   toggleDialog(orderProductId: number) {
     this.visible = !this.visible;
     this.selectedProductId = orderProductId;
-    this.dialogToggle.emit({ visible: this.visible, productId: this.selectedProductId! });
+    this.dialogToggle.emit({visible: this.visible, productId: this.selectedProductId!});
   }
 }

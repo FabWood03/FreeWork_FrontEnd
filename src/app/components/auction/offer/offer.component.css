@@ -25,7 +25,7 @@
   font-size: 1.1rem;
 }
 
-.p-card .p-card-body{
+.p-card .p-card-body {
   border-radius: 20px;
 }
 
@@ -41,20 +41,19 @@
   justify-content: end;
 }
 
-.p-confirm-dialog{
+.p-confirm-dialog {
   display: flex;
 }
 
-.fa-pen:hover, .fa-trash:hover, .fa-trophy:hover,
-.fa-solid:active, .fa-trash:active, .fa-trophy:active, .icon {
+.fa-pen:hover, .fa-trash:hover, .fa-trophy:hover, .fa-trash:active, .fa-trophy:active {
   color: #f68d44;
   text-shadow: #7A7A7A 1px 1px 1px;
 }
 
-.p-confirm-dialog-accept{
+.p-confirm-dialog-accept {
   background-color: #f68d44;
 }
 
-.p-confirm-dialog-reject{
+.p-confirm-dialog-reject {
   color: #2d404e;
 }

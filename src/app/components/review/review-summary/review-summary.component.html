@@ -2,9 +2,7 @@
   <h2 class="description">Recensioni</h2>
   <div class="d-flex">
     <div class="reviews d-grid mr-5 mt-2">
-      <!-- Mostra la media delle recensioni come intero (senza decimali) -->
       <span class="rating-number text-center">{{ stars | number:'1.1-1' }}</span>
-      <!-- Mostra la valutazione in formato stelle con mezze stelle, ma solo parte intera -->
       <p-rating [(ngModel)]="integerStarsValue" [readonly]="true" [cancel]="false" [stars]="5"></p-rating>
       <span>{{ reviewSummaryResponse?.totalReviews }} recensioni</span>
     </div>
@@ -48,7 +46,6 @@
           <span class="ml-1">{{ value1stars[0].value | number:'1.0-0' }}%</span>
         </div>
       }
-
     </div>
   </div>
 </div>

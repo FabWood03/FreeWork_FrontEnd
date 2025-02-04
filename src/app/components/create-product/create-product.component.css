@@ -39,7 +39,7 @@
   padding: 0.5rem;
 }
 
-.custom-table td, .custom-table th{
+.custom-table td, .custom-table th {
   background-color: #F3F4F6;
 }
 
@@ -67,13 +67,12 @@
   padding: 0.2rem;
 }
 
-/* CSS per centrare il dropdown nella colonna "SERVIZI" */
 .custom-table td {
-  text-align: center; /* Centra il contenuto delle celle */
+  text-align: center;
 }
 
 .custom-table .th {
-  text-align: center; /* Centra il contenuto dell'intestazione */
+  text-align: center;
 }
 
 .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
@@ -88,11 +87,11 @@
 
 .messages-container {
   position: absolute;
-  top: 20px; /* Puoi regolare la posizione in base alle tue esigenze */
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 20%; /* Puoi regolare la larghezza */
-  z-index: 1000; /* Assicurati che sia sopra gli altri contenuti */
+  width: 20%;
+  z-index: 1000;
 }
 
 .img-div {
@@ -128,7 +127,7 @@
   color: #7A7A7A;
 }
 
-h3{
+h3 {
   color: #2d404e;
   font-weight: bold;
 }
@@ -137,12 +136,12 @@ h3{
   margin-top: 50px;
 }
 
-.table-card .p-card{
+.table-card .p-card {
   background-color: #F3F4F6;
   margin-top: 1%;
 }
 
-.form-control{
+.form-control {
   border-radius: 15px;
   border-color: #d1d5db;
 }

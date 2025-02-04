@@ -13,7 +13,7 @@ import {UserService} from '../../../services/user.service';
   styleUrls: ['./package-details.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PackageDetailsComponent implements OnInit{
+export class PackageDetailsComponent implements OnInit {
   @Input() productPackage!: ProductPackageResponseDTO;
   @Input() productId!: number;
   @Input() productOwnerEmail!: string;

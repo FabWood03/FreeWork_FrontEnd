@@ -20,12 +20,12 @@
   margin-bottom: 16px;
 }
 
-.done-button .p-button{
+.done-button .p-button {
   background-color: #f68d44;
   border: none;
 }
 
-.cancel-button .p-button{
+.cancel-button .p-button {
   background-color: #888888;
   border: none;
 }

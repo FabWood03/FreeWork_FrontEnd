@@ -113,7 +113,12 @@ export class OrderService {
   }
 
   deliveryResponse(orderProductId: number, deliveryResponse: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/deliveryResponse`, null, {params: {orderProductId: orderProductId, deliveryResponse: deliveryResponse}}).pipe(
+    return this.http.post(`${this.apiUrl}/deliveryResponse`, null, {
+      params: {
+        orderProductId: orderProductId,
+        deliveryResponse: deliveryResponse
+      }
+    }).pipe(
       catchError((error) => this.handleError(error, 'Errore durante la risposta alla consegna'))
     );
   }

@@ -6,7 +6,8 @@ import {ErrorUtils} from '../util/ErrorUtils';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private errorUtils: ErrorUtils) {}
+  constructor(private errorUtils: ErrorUtils) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(

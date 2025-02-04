@@ -1,15 +1,15 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AnimationOptions } from 'ngx-lottie';
-import { CardResponseDTO } from '../../dto/response/CardResponseDTO';
-import { debounceTime, tap } from 'rxjs/operators';
-import { catchError, of, Subject, takeUntil } from 'rxjs';
-import { FilterService } from '../../services/filter.service';
-import { FilterEntitiesResponse } from '../../dto/response/FilterEntitiesResponse';
-import { FilterRequest } from '../../dto/request/FilterRequest';
-import { ErrorUtils } from '../../util/ErrorUtils';
-import { SubCategoryResponseDTO } from '../../dto/response/category/SubCategoryResponseDTO';
-import { CategoryService } from '../../services/category.service';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router} from '@angular/router';
+import {AnimationOptions} from 'ngx-lottie';
+import {CardResponseDTO} from '../../dto/response/CardResponseDTO';
+import {debounceTime, tap} from 'rxjs/operators';
+import {catchError, of, Subject, takeUntil} from 'rxjs';
+import {FilterService} from '../../services/filter.service';
+import {FilterEntitiesResponse} from '../../dto/response/FilterEntitiesResponse';
+import {FilterRequest} from '../../dto/request/FilterRequest';
+import {ErrorUtils} from '../../util/ErrorUtils';
+import {SubCategoryResponseDTO} from '../../dto/response/category/SubCategoryResponseDTO';
+import {CategoryService} from '../../services/category.service';
 import {FilterStateService} from '../../services/filter-state.service';
 
 @Component({
@@ -49,9 +49,9 @@ export class FilteredHomePageComponent implements OnInit, OnDestroy {
 
   // Carousel responsive options
   responsiveOptions = [
-    { breakpoint: '1199px', numVisible: 1, numScroll: 1 },
-    { breakpoint: '991px', numVisible: 2, numScroll: 1 },
-    { breakpoint: '767px', numVisible: 1, numScroll: 1 },
+    {breakpoint: '1199px', numVisible: 1, numScroll: 1},
+    {breakpoint: '991px', numVisible: 2, numScroll: 1},
+    {breakpoint: '767px', numVisible: 1, numScroll: 1},
   ];
 
   constructor(
@@ -60,7 +60,8 @@ export class FilteredHomePageComponent implements OnInit, OnDestroy {
     private errorUtils: ErrorUtils,
     private categoryService: CategoryService,
     private filterStateService: FilterStateService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getSubcategories();
@@ -75,12 +76,12 @@ export class FilteredHomePageComponent implements OnInit, OnDestroy {
         case 'search':
           this.searchText = state.filterValue;
           this.filterStateService.setSearchText(state.filterValue);
-          this.processFilters({ value: state.filterValue }, 'search');
+          this.processFilters({value: state.filterValue}, 'search');
           break;
         case 'subcategory':
           this.selectedSubCategoryId = +state.filterValue;
           this.filterStateService.setSubcategory(+state.filterValue);
-          this.processFilters({ value: state.filterValue }, 'subcategory');
+          this.processFilters({value: state.filterValue}, 'subcategory');
           break;
         default:
           console.error('Invalid filter type:', state.filterType);
@@ -96,10 +97,10 @@ export class FilteredHomePageComponent implements OnInit, OnDestroy {
     });
 
     this.budgetSubject.pipe(debounceTime(500)).subscribe((rangeValues) => {
-      this.applyFilters({ value: rangeValues }, 'range');
+      this.applyFilters({value: rangeValues}, 'range');
     });
 
-    this.filterSubject.pipe(debounceTime(400)).subscribe(({ event, type }) => {
+    this.filterSubject.pipe(debounceTime(400)).subscribe(({event, type}) => {
       this.processFilters(event, type);
     });
   }
@@ -137,7 +138,7 @@ export class FilteredHomePageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.filterSubject.next({ event, type });
+    this.filterSubject.next({event, type});
   }
 
   // Processa i filtri e chiama il servizio
@@ -198,11 +199,11 @@ export class FilteredHomePageComponent implements OnInit, OnDestroy {
   }
 
   goToAuction(auctionId: number): void {
-    this.router.navigate(['/auction'], { state: { auctionId } });
+    this.router.navigate(['/auction'], {state: {auctionId}});
   }
 
   goToProduct(productId: number): void {
-    this.router.navigate(['/product'], { state: { productId } });
+    this.router.navigate(['/product'], {state: {productId}});
   }
 
   validateRange(): void {
@@ -215,6 +216,6 @@ export class FilteredHomePageComponent implements OnInit, OnDestroy {
       Math.max(0, Math.min(this.rangeValues[1], 3000)),
     ];
 
-    this.updateBudget({ values: this.rangeValues });
+    this.updateBudget({values: this.rangeValues});
   }
 }

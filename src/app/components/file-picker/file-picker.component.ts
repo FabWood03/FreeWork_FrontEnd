@@ -12,17 +12,20 @@ export class FilePickerComponent {
   @Output() filesSelected = new EventEmitter<File[]>();
   files: File[] = [];
 
-  totalSize : number = 0;
+  totalSize: number = 0;
 
-  totalSizePercent : number = 0;
+  totalSizePercent: number = 0;
 
-  constructor(private config: PrimeNGConfig, private messageService: MessageService) {}
+  constructor(private config: PrimeNGConfig, private messageService: MessageService) {
+  }
 
   choose(event: any, callback: () => void) {
     callback();
   }
 
-  onRemoveTemplatingFile(event: any, file: { size: any; }, removeFileCallback: (arg0: any, arg1: any) => void, index: any) {
+  onRemoveTemplatingFile(event: any, file: {
+    size: any;
+  }, removeFileCallback: (arg0: any, arg1: any) => void, index: any) {
     removeFileCallback(event, index);
     this.totalSize -= parseInt(this.formatSize(file.size));
     this.totalSizePercent = this.totalSize / 10;
@@ -35,10 +38,10 @@ export class FilePickerComponent {
   }
 
   onTemplatedUpload() {
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
+    this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000});
   }
 
-  onSelectedFiles(event: FileSelectEvent ) {
+  onSelectedFiles(event: FileSelectEvent) {
     this.files = event.currentFiles;
     this.filesSelected.emit(this.files);
     this.files.forEach((file) => {

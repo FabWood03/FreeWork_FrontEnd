@@ -256,11 +256,6 @@
   margin-top: 1rem;
 }
 
-.save-btn {
-  border: none;
-  background-color: #f68d44;
-}
-
 .p-confirm-dialog {
   background-color: #f8f9fa !important;
   border-radius: 20px !important;

@@ -26,11 +26,11 @@ export class ReportingComponent {
     };
 
     if (this.reviewId) {
-      this.submitReport.emit({ ...reportData, reviewId: this.reviewId });
+      this.submitReport.emit({...reportData, reviewId: this.reviewId});
     } else if (this.productId) {
-      this.submitProduct.emit({ ...reportData, productId: this.productId });
+      this.submitProduct.emit({...reportData, productId: this.productId});
     } else if (this.userId) {
-      this.submitUser.emit({ ...reportData, userId: this.userId });
+      this.submitUser.emit({...reportData, userId: this.userId});
     }
 
     this.closeDialog.emit(false);

@@ -30,12 +30,11 @@ export class SellerProfileComponent implements OnInit {
 
   auctionCards: CardResponseDTO[] = [];
   productCards: CardResponseDTO[] = [];
-  stars: number = 5;
   visible: boolean = false;
   lottieConfigGhost: AnimationOptions = this.getLottieConfig('ghost.json');
   userData: UserResponseDTO = new UserResponseDTO();
 
-  isLoadingReviews: boolean = false;  // Stato di caricamento delle recensioni
+  isLoadingReviews: boolean = false;
 
   constructor(
     private router: Router,
@@ -92,7 +91,7 @@ export class SellerProfileComponent implements OnInit {
         tap((data) => {
           this.userReviews = data;
         }),
-        catchError((err) => {
+        catchError(() => {
           return of(null);
         }),
         tap(() => {

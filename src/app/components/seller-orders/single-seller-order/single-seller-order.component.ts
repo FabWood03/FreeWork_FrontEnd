@@ -15,7 +15,8 @@ import {Router} from '@angular/router';
 export class SingleSellerOrderComponent {
   @Input() singleOrder!: OrderResponseDTO;
 
-  constructor(private userService: UserService, private orderService: OrderService, private errorUtils: ErrorUtils, private router: Router) {}
+  constructor(private userService: UserService, private orderService: OrderService, private errorUtils: ErrorUtils, private router: Router) {
+  }
 
   acceptOrder(orderProductId: number) {
     this.singleOrder.orderProducts.forEach((orderProduct) => {

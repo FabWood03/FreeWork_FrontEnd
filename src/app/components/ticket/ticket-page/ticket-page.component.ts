@@ -9,7 +9,7 @@ import {ErrorUtils} from '../../../util/ErrorUtils';
 @Component({
   selector: 'app-ticket-page',
   templateUrl: './ticket-page.component.html',
-  styleUrls: ['./ticket-page.component.css'],  // Assicurati di avere il percorso corretto per il file CSS
+  styleUrls: ['./ticket-page.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class TicketPageComponent implements OnInit {
@@ -79,7 +79,7 @@ export class TicketPageComponent implements OnInit {
   }
 
   onSubmitResponse() {
-    if (this.ticketStatus === ''){
+    if (this.ticketStatus === '') {
       this.errorUtils.showError('Seleziona uno stato per il ticket');
       return;
     }

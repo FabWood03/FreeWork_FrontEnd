@@ -111,12 +111,18 @@ export class ReviewSummaryComponent implements OnInit {
 
   private getColorForRating(rating: number): string {
     switch (rating) {
-      case 5: return '#86409d'; // Verde
-      case 4: return '#86409d'; // Blu
-      case 3: return '#86409d'; // Giallo
-      case 2: return '#86409d'; // Arancione
-      case 1: return '#86409d'; // Rosso
-      default: return '#86409d'; // Grigio
+      case 5:
+        return '#86409d';
+      case 4:
+        return '#86409d';
+      case 3:
+        return '#86409d';
+      case 2:
+        return '#86409d';
+      case 1:
+        return '#86409d';
+      default:
+        return '#86409d';
     }
   }
 }

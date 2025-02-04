@@ -7,7 +7,6 @@
   border-bottom: 1px solid #87419E;
 }
 
-/* Contenitore per centrare l'immagine */
 .carousel-item-container {
   display: flex;
   align-items: center;
@@ -76,7 +75,6 @@
   transition: background 0.3s ease;
 }
 
-/* Animazioni */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -97,7 +95,7 @@
   }
 }
 
-.triangle-icon{
+.triangle-icon {
   text-shadow: #FFC2A1 1px 1px 2px;
 }
 
@@ -116,12 +114,12 @@
   border-top-right-radius: 30px;
 }
 
-.cancel-button .p-button{
+.cancel-button .p-button {
   background-color: #7A7A7A;
   border: none;
 }
 
-.done-button .p-button{
+.done-button .p-button {
   background-color: #F78A51;
   border: none;
 }

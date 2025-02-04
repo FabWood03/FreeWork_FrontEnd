@@ -70,7 +70,7 @@ export class ProductService {
   createProduct(productRequestDTO: ProductRequestDTO, images: File[]): Observable<ProductDetailsDTO> {
     const formData = new FormData();
 
-    formData.append('productRequestDTO', new Blob([JSON.stringify(productRequestDTO)], { type: 'application/json' }));
+    formData.append('productRequestDTO', new Blob([JSON.stringify(productRequestDTO)], {type: 'application/json'}));
 
     images.forEach(image => formData.append('images', image));
 

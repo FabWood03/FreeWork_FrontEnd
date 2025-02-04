@@ -7,7 +7,8 @@ import {ErrorUtils} from '../util/ErrorUtils';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private errorUtils: ErrorUtils) {}
+  constructor(private router: Router, private errorUtils: ErrorUtils) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');

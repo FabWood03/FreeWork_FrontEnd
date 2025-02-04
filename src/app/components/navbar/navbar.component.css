@@ -16,10 +16,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease; /* Transizione per il movimento */
+  transition: transform 0.3s ease;
 }
 
-/* Animazione al passaggio del cursore */
 .icon-wrapper i:hover {
   transform: translateY(-6px);
 }

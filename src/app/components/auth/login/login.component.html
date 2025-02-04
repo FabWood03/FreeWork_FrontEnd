@@ -1,11 +1,6 @@
-<!--Schermo-->
 <div class="container-fluid d-flex justify-content-center align-items-center position-relative">
   <p-toast></p-toast>
-
-  <!--Card-->
   <div class="card rounded-5 p-4 position-relative w-100 bg-white fade-in">
-
-    <!--Forma geometrica in alto a sx-->
     <div class="ellipse-1_4-4 d-none d-xxl-block">
       <svg width="730" height="730" viewBox="0 0 651 437" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -14,10 +9,7 @@
       </svg>
     </div>
 
-    <!--Serve per strutturare la griglia e crea una riga che poi ha 2 colonne-->
     <div class="row">
-
-      <!--Parte sx della card e 1 colonna-->
       <div class="col-lg-5 col-md-6 text-center">
         <img ngSrc="../../../../assets/login_freepick_image.jpeg" class="img-fluid d-none d-sm-block"
              alt="Responsive image"
@@ -25,34 +17,28 @@
         <h1 class="text-center title mt-2">FreeWork</h1>
       </div>
 
-      <!--Parte dx della card e 2 colonna-->
       <div class="col-lg-7 col-md-6 d-flex flex-column justify-content-center align-items-center">
         <h1 class="title-header">Bentornato!</h1>
         <form [formGroup]="loginForm" class="mt-4 w-75 d-flex flex-column">
-          <!--Form email-->
           <div class="mb-3 w-100">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control rounded-4 border-2" formControlName="email" id="email"
                    placeholder="Inserisci la tua email" autocomplete="username" required>
           </div>
 
-          <!--Form password-->
           <div class="mb-4
            w-100">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control rounded-4 border-2" formControlName="password" id="password"
                    placeholder="Inserisci la tua password" autocomplete="current-password" required>
-            <!-- Aggiunto formControlName -->
           </div>
           <button (click)="onSubmit()" type="submit" class="btn w-100 rounded-4" [disabled]="!loginForm">Accedi</button>
-          <!-- todo remove routerLink -->
         </form>
         <p class="mt-4 text-center">Non hai un account? <a [routerLink]="['/sign-up']" class="link-class">Registrati</a>
         </p>
       </div>
     </div>
 
-    <!--Forma geometrica in basso a dx-->
     <div class="ellipse-2_1-2 d-none d-xxl-block">
       <svg width="730" height="730" viewBox="0 0 502 521" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path

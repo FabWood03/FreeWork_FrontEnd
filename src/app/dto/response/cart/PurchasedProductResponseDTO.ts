@@ -17,8 +17,6 @@ export class PurchasedProductResponseDTO {
     this.price = price;
   }
 
-  // Metodo statico per creare un PurchasedProductResponseDTO da un dato grezzo
-
   static fromPurchasedProductData(product: any): PurchasedProductResponseDTO {
     return new PurchasedProductResponseDTO(
       product.id,
@@ -29,10 +27,5 @@ export class PurchasedProductResponseDTO {
       product.type,
       product.price
     );
-  }
-
-  // Metodo statico per creare un array di PurchasedProductResponseDTO da un array di dati grezzi
-  static fromPurchasedProductArray(products: any[]): PurchasedProductResponseDTO[] {
-    return products.map(product => PurchasedProductResponseDTO.fromPurchasedProductData(product));
   }
 }

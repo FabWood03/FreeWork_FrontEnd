@@ -13,7 +13,8 @@ export class CategoryService {
   constructor(
     private http: HttpClient,
     private errorUtils: ErrorUtils
-  ) { }
+  ) {
+  }
 
   private handleError(error: any, context: string): Observable<never> {
     this.errorUtils.showHttpError(error, context);

@@ -1,15 +1,15 @@
 import {MacroCategoryResponseDTO} from './MacroCategoryResponseDTO';
 
 export class SubCategoryResponseDTO {
-    id: number;
-    name: string;
-    macroCategory: MacroCategoryResponseDTO;
+  id: number;
+  name: string;
+  macroCategory: MacroCategoryResponseDTO;
 
-    constructor(id: number, name: string, macroCategory: MacroCategoryResponseDTO) {
-      this.id = id;
-      this.name = name;
-      this.macroCategory = macroCategory;
-    }
+  constructor(id: number, name: string, macroCategory: MacroCategoryResponseDTO) {
+    this.id = id;
+    this.name = name;
+    this.macroCategory = macroCategory;
+  }
 
   static fromSubCategoryResponseDTO(subCategory: SubCategoryResponseDTO) {
     if (!subCategory || !subCategory.macroCategory) {
@@ -41,12 +41,12 @@ export class SubCategoryResponseDTO {
       const macroCategoryName = macroCategory.name;
 
       if (!categoriesMap.has(macroCategoryName)) {
-        categoriesMap.set(macroCategoryName, { id: macroCategory.id, subcategories: [] });
+        categoriesMap.set(macroCategoryName, {id: macroCategory.id, subcategories: []});
       }
       categoriesMap.get(macroCategoryName)?.subcategories.push(subcategory);
     });
 
-    return Array.from(categoriesMap, ([label, { id, subcategories }]) => ({
+    return Array.from(categoriesMap, ([label, {id, subcategories}]) => ({
       id: id,
       label: label,
       subcategories: subcategories,

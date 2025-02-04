@@ -9,16 +9,16 @@ export class ErrorUtils {
 
   private static errorShown: { [key: string]: boolean } = {};
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) {
+  }
 
   showHttpError(error: HttpErrorResponse, context: string): void {
     const errorKey = `${error.status}-${error.error?.status}`;
 
     if (ErrorUtils.errorShown[errorKey]) {
-      return; // Se il messaggio è già stato mostrato, non farlo di nuovo
+      return;
     }
 
-    // Segna che il messaggio è stato mostrato
     ErrorUtils.errorShown[errorKey] = true;
 
     if (error.error.status === 200 || error.error.status === 201) {

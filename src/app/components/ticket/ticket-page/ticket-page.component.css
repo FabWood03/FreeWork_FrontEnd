@@ -1,22 +1,22 @@
-.answer .p-card{
+.answer .p-card {
   background-color: #FCFCFC;
   border-color: #E7E7E7;
 }
 
-.p-card .p-card-content{
+.p-card .p-card-content {
   padding: 0;
 }
 
-.back-button .p-button{
+.back-button .p-button {
   background-color: #84818A;
   border-color: #84818A;
 }
 
-.card-div .p-card{
+.card-div .p-card {
   box-shadow: 0 4px 8px 0 rgba(120, 120, 120, 0.2), 0 6px 20px 0 rgba(197, 197, 197, 0.19);
 }
 
-.done-button .p-button{
+.done-button .p-button {
   background-color: #87419E;
   border-color: #87419E;
 }
@@ -28,7 +28,7 @@ textarea {
   border: 2px solid rgba(228, 228, 228, 0.88);
   border-radius: 12px;
   box-shadow: none;
-  resize: none;  /* Evita il ridimensionamento */
+  resize: none;
 }
 
 textarea:focus {

@@ -23,7 +23,7 @@
 }
 
 .p-tabview .p-tabview-panels {
-  overflow-y: auto;  /* Aggiunge uno scroll verticale se il contenuto supera l'altezza */
+  overflow-y: auto;
   max-height: 100%;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .p-toast {
-  z-index: 9999 !important; /* Assicura che sia sempre sopra a tutto */
+  z-index: 9999 !important;
 }
 
 .lottie {

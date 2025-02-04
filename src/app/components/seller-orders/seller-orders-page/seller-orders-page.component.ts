@@ -97,7 +97,7 @@ export class SellerOrdersPageComponent implements OnInit {
         this.delayedOrders = orders.delayedOrders;
         this.refusedOrders = orders.refusedOrders;
       }),
-      catchError((err) => {
+      catchError(() => {
         this.errorUtils.showWarning('Non ci sono ordini che corrispondono ai criteri di ricerca selezionati');
         return of([]);
       })

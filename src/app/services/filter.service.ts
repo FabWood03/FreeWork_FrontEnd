@@ -10,7 +10,8 @@ import {FilterRequest} from '../dto/request/FilterRequest';
 export class FilterService {
   private baseUrl = 'http://localhost:8080/api/filter';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   filterHome(filterRequest: FilterRequest): Observable<FilterEntitiesResponse> {
     return this.http.post<FilterEntitiesResponse>(`${this.baseUrl}/filterHome`, filterRequest);

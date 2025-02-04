@@ -23,11 +23,13 @@
             <div class="form-div flex flex-column ">
 
               <h3>Titolo *</h3>
-              <input id="title" [minLength]="25" [maxLength]="80" type="text" pInputText [(ngModel)]="product.title" placeholder="Inserisci il titolo"
+              <input id="title" [minLength]="25" [maxLength]="80" type="text" pInputText [(ngModel)]="product.title"
+                     placeholder="Inserisci il titolo"
                      variant="filled" class="input-area mb-3"/>
 
               <h3>Descrizione *</h3>
-              <textarea id="description" [minLength]="25" [maxLength]="1500" class="textarea input-area mb-3" variant="filled" rows="5" cols="30"
+              <textarea id="description" [minLength]="25" [maxLength]="1500" class="textarea input-area mb-3"
+                        variant="filled" rows="5" cols="30"
                         pInputTextarea
                         placeholder="Inserisci una descrizione" [(ngModel)]="product.description"
                         [autoResize]="false"></textarea>

@@ -1,8 +1,8 @@
-.picture{
+.picture {
   border-radius: 20%;
 }
 
-.photo{
+.photo {
   justify-items: center;
   justify-content: center;
 }
@@ -19,24 +19,23 @@
   }
 }
 
-.p-card .p-card-content{
+.p-card .p-card-content {
   padding: 0;
 }
 
-.p-card{
+.p-card {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 25px;
   margin-top: -7%;
 }
 
 .purple-box {
-  /*background-color: #C18ED1;*/
   background-color: #F78A51;
   margin-top: 5%;
   height: max-content;
 }
 
-.orange-title{
+.orange-title {
   color: #F78A51;
 }
 
@@ -51,10 +50,9 @@
   align-self: center;
 }
 
-.future-auctions{
+.future-auctions {
   margin-top: -7%;
 }
-
 
 
 .price-filter {
@@ -105,7 +103,6 @@
   font-weight: 500;
 }
 
-/* Personalizzazione Slider */
 .custom-slider {
   .p-slider {
     height: 6px;

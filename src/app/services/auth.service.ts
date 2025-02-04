@@ -17,7 +17,8 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private errorUtils: ErrorUtils
-  ) {}
+  ) {
+  }
 
   private handleError(error: any, context: string): Observable<never> {
     this.errorUtils.showHttpError(error, context);
@@ -35,9 +36,9 @@ export class AuthService {
   }
 
   login(request: UserLoginRequestDTO): Observable<TokenDTO> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    return this.http.post<TokenDTO>(`${this.baseUrl}/login`, request, { headers }).pipe(
+    return this.http.post<TokenDTO>(`${this.baseUrl}/login`, request, {headers}).pipe(
       map((response: TokenDTO) => {
         this.saveToken(response.token);
         return response;
