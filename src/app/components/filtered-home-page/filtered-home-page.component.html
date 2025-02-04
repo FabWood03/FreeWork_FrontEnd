@@ -17,25 +17,25 @@
         <p class="filter-label">Filtra per Prezzo</p>
         <div class="slider-container">
           <div class="input-fields">
-        <span class="p-input-icon-left">
-          <i class="pi pi-euro"></i>
-          <input type="number" pInputText
-                 [(ngModel)]="rangeValues[0]"
-                 (change)="validateRange()"
-                 class="price-input"
-                 placeholder="Min">
-        </span>
+            <div class="p-input-icon-left">
+              <i class="pi pi-euro"></i>
+              <input type="number" pInputText
+                     [(ngModel)]="rangeValues[0]"
+                     (change)="validateRange()"
+                     class="price-input"
+                     placeholder="Min">
+            </div>
 
             <span class="separator">-</span>
 
             <span class="p-input-icon-left">
-          <i class="pi pi-euro"></i>
-          <input type="number" pInputText
-                 [(ngModel)]="rangeValues[1]"
-                 (change)="validateRange()"
-                 class="price-input"
-                 placeholder="Max">
-        </span>
+              <i class="pi pi-euro"></i>
+              <input type="number" pInputText
+                     [(ngModel)]="rangeValues[1]"
+                     (change)="validateRange()"
+                     class="price-input"
+                     placeholder="Max">
+            </span>
           </div>
 
           <p-slider [(ngModel)]="rangeValues"

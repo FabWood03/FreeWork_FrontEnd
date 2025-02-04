@@ -74,18 +74,6 @@
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
-
-  .p-input-icon-left {
-    position: relative;
-
-    .pi {
-      position: absolute;
-      left: 0.75rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #6c757d;
-    }
-  }
 }
 
 .price-input {
