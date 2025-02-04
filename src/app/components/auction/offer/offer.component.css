@@ -1,0 +1,60 @@
+/* Modifica del p-card-body solo per l'elemento con la classe 'first-offer' (Oro) */
+.offer-card.first-offer .p-card-body {
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FFEA00 0%, #FFD700 25%, #E6C200 50%, #C8A200 75%, #A88A00 90%),
+  radial-gradient(ellipse farthest-corner at left top, #FFF9E0 0%, #FFE899 30%, #FFD700 60%, #E6B566 80%, #C8A165 100%);
+  color: white;
+}
+
+/* Stile per l'offerta con la classe 'second-offer' (Argento) */
+.offer-card.second-offer .p-card-body {
+  background: radial-gradient(ellipse farthest-corner at right bottom, #D9D9D9 0%, #C0C0C0 25%, #A6A6A6 50%, #8C8C8C 75%, #737373 90%),
+  radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #F5F5F5 30%, #E5E5E5 60%, #CCCCCC 80%, #B3B3B3 100%);
+  color: white;
+
+}
+
+/* Stile per l'offerta con la classe 'third-offer' (Bronzo) */
+.offer-card.third-offer .p-card-body {
+  background: radial-gradient(ellipse farthest-corner at right bottom, #ea9c5d 0%, #E8A26D 25%, #D8905B 50%, #cc783d 75%, #A66839 90%),
+  radial-gradient(ellipse farthest-corner at left top, #FFF4E6 0%, #FFE2C4 30%, #F6C19C 60%, #E3A277 80%, #C98A5A 100%);
+  color: white;
+}
+
+.offer-card .p-card-body {
+  background-color: rgba(228, 228, 228, 0.6);
+  font-size: 1.1rem;
+}
+
+.p-card .p-card-body{
+  border-radius: 20px;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.p-dialog .p-dialog-footer {
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  display: flex;
+  justify-content: end;
+}
+
+.p-confirm-dialog{
+  display: flex;
+}
+
+.fa-pen:hover, .fa-trash:hover, .fa-trophy:hover,
+.fa-solid:active, .fa-trash:active, .fa-trophy:active, .icon {
+  color: #f68d44;
+  text-shadow: #7A7A7A 1px 1px 1px;
+}
+
+.p-confirm-dialog-accept{
+  background-color: #f68d44;
+}
+
+.p-confirm-dialog-reject{
+  color: #2d404e;
+}

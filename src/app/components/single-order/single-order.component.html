@@ -1,0 +1,69 @@
+<p-panel styleClass="mb-5" [toggleable]="false">
+  <ng-template pTemplate="header">
+    <div class="d-grid align-items-center">
+      <div>
+        <span class="purple-color font-medium">Id ordine:</span>
+        <span>#{{ singleOrder.id }}</span>
+      </div>
+      <div>
+        <span class="font-medium">Data ordine:⠀</span>
+        <span class="grey-color font-medium">{{ singleOrder.purchaseDate }}</span>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    @for (orderProduct of singleOrder.orderProducts; track orderProduct.id) {
+      <div class="my-3">
+        <div class="single-order d-flex justify-content-between">
+          <div class="d-flex align-items-center gap-4">
+            <img [src]="apiBaseUrl + orderProduct.productImagePhoto || '../../../assets/fotoCard.jpeg'"
+                 class="photo rounded-4 me-3" loading="lazy" height="150" width="250" alt="OrderProductImage">
+
+            <div class="d-grid flex-column order-product">
+              <span class="font-bold">{{ orderProduct.productName }}</span>
+              <span class="mb-4">{{ orderProduct.buyerName }}</span>
+              <div class="d-flex align-items-center">
+                <span class="font-semibold">Pacchetto:⠀</span>
+                <span class="grey-color font-medium">{{ orderProduct.packageName }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex w-50 justify-content-between">
+            <div class="information">
+              <span class="font-semibold">Prezzo</span>
+              <span class="purple-color font-semibold">€{{ orderProduct.price }}</span>
+            </div>
+            <div class="information">
+              <span class="font-semibold">Status</span>
+              <p-chip label="{{ orderProduct.status }}"></p-chip>
+            </div>
+            <div class="information">
+              <span class="font-semibold">Data di consegna</span>
+              <span class="green-color">{{ orderProduct.estimatedDeliveryDate }}</span>
+            </div>
+            <div class="information">
+              <span class="font-semibold">Recensione</span>
+              @if (orderProduct.status === 'Rifiutato' || orderProduct.status === 'In attesa' || orderProduct.status === 'In lavorazione') {
+                <i class="fa-solid fa-x"></i>
+              } @else if ((orderProduct.status === 'Consegnato' || orderProduct.status === 'Consegna in ritardo') && !orderProduct.hasReview) {
+                <i class="pi pi-comment gotoProfile-text" (click)="toggleDialog(orderProduct.productId)"></i>
+              } @else if (orderProduct.hasReview) {
+                <i class="fa-solid fa-check"></i>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="d-flex justify-content-end">
+      <span class="font-semibold">Totale: €{{ singleOrder.totalPrice | number:'1.2-2' }}</span>
+    </div>
+  </ng-template>
+</p-panel>
+
+

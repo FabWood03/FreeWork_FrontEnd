@@ -1,0 +1,48 @@
+<p-panel [toggleable]="true" [collapsed]="true">
+  <p-toast></p-toast>
+  <ng-template pTemplate="header">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+      <span class="font-bold ml-2 ticket-id">Ticket#{{ singleTicket.id }}</span>
+
+      @if (singleTicket.priorityFlag === 'HIGH') {
+        <ng-container>
+          <p-tag severity="danger" value="Alta Priorità" [rounded]="true" class="ml-2"></p-tag>
+        </ng-container>
+      } @else if (singleTicket.priorityFlag === 'MEDIUM') {
+        <ng-container>
+          <p-tag severity="warning" value="Media Priorità" [rounded]="true" class="ml-2"></p-tag>
+        </ng-container>
+      } @else if (singleTicket.priorityFlag === 'LOW') {
+        <ng-container>
+          <p-tag severity="info" value="Bassa Priorità" [rounded]="true" class="ml-2"></p-tag>
+        </ng-container>
+      }
+    </div>
+  </ng-template>
+
+  <div class="panel-content">
+    <div class="content-text ml-2">
+      <p class="font-bold">{{ singleTicket.title }}</p>
+      <p>{{ singleTicket.description }}</p>
+      @if (singleTicket.state === 'In attesa' || singleTicket.state === 'In lavorazione') {
+        <span (click)="goToSingleTicketPage(singleTicket.id)" class="open-single-ticket">Apri ticket</span>
+      } @else if (singleTicket.state === 'Accettato' || singleTicket.state === 'Rifiutato') {
+        <span class="closed-ticket">Ticket chiuso</span>
+      }
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="panel-footer d-flex justify-content-between align-items-center">
+      <div class="user-info d-flex align-items-center ml-2">
+        <p-avatar [image]="getAvatarUrl(singleTicket.userPhoto)" class="p-1"
+                  shape="circle"></p-avatar>
+        <span class="ml-2 card-user" (click)="goToSellerProfile(singleTicket.userId)"
+        >{{ singleTicket.userName }} {{ singleTicket.userSurname }}</span>
+      </div>
+      <div class="post-date d-flex align-items-center mr-2">
+        <span>Postato il {{ singleTicket.creationDate }}</span>
+      </div>
+    </div>
+  </ng-template>
+</p-panel>

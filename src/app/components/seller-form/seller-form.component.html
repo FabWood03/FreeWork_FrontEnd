@@ -1,0 +1,197 @@
+<app-navbar></app-navbar>
+
+<div class="img-div">
+  <img src="../../../../assets/sellerForm.jpeg" class="image" alt="SellerForm">
+</div>
+
+<div class="p-5 mb-5">
+  <h1>Diventa un venditore!</h1>
+  <p class="auction-description font-semibold">Raccontaci qualcosa su di te. Questa informazione apparirà sul tuo
+    profilo <br> pubblico e aiuterà i potenziali acquirenti a conoscerti meglio.</p>
+</div>
+
+<div class="purple-box">
+  <div class="card-div p-5">
+    <p-card>
+      <h2>Dettagli</h2>
+      <p-divider></p-divider>
+
+      <form [formGroup]="sellerForm" (ngSubmit)="submitSellerRequest()">
+        <div class="form">
+          <h2 class="mb-3">FOTO</h2>
+          <div class="profile-photo-container">
+            <div *ngIf="profilePhotoPreviewUrl">
+              <div class="mb-3">
+                <img [src]="profilePhotoPreviewUrl" alt="Profile Photo Preview" class="profile-photo-preview"/>
+              </div>
+            </div>
+
+            <p-fileUpload
+              [mode]="'basic'"
+              [chooseLabel]="'Scegli'"
+              [chooseIcon]="'pi pi-upload'"
+              name="profilePhoto"
+              url="https://www.primefaces.org/cdn/api/upload.php"
+              accept="image/*"
+              maxFileSize="1000000"
+              (onSelect)="onProfilePhotoSelected($event)"
+              (onClear)="onProfilePhotoCleared()"
+              [id]="fileInputId"
+            />
+          </div>
+
+          <p-divider></p-divider>
+
+          <h2 class="mb-3">DATI ANAGRAFICI</h2>
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex justify-content-between">
+              <div class="flex flex-column custom-input">
+                <h3>Nome</h3>
+                <input
+                  placeholder="Inserisci il tuo nome"
+                  [ngModelOptions]="{standalone: true}"
+                  [disabled]="true"
+                  id="name"
+                  type="text"
+                  [ngModel]="name"
+                  pInputText
+                  variant="filled"/>
+              </div>
+              <div class="flex flex-column custom-input">
+                <h3>Cognome</h3>
+                <input
+                  placeholder="Inserisci il tuo cognome"
+                  [ngModelOptions]="{standalone: true}"
+                  [disabled]="true"
+                  id="surname"
+                  type="text"
+                  pInputText
+                  [ngModel]="surname"
+                  variant="filled"/>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <div class="flex flex-column custom-input">
+                <h3>Codice Fiscale</h3>
+                <input
+                  id="fiscalCode"
+                  placeholder="Inserisci il tuo codice fiscale"
+                  type="text"
+                  pInputText
+                  formControlName="fiscalCode"
+                  variant="filled"/>
+              </div>
+              <div class="flex flex-column custom-input">
+                <h3>Data di Nascita</h3>
+                <p-calendar
+                  id="birthDate"
+                  formControlName="birthDate"
+                  placeholder="Seleziona la tua data di nascita"
+                  variant="filled"/>
+              </div>
+            </div>
+          </div>
+
+          <p-divider></p-divider>
+
+          <h2 class="mb-3">PROFILO</h2>
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex justify-content-between">
+              <div class="flex flex-column custom-input">
+                <h3>Username</h3>
+                <input
+                  [disabled]="true"
+                  [ngModelOptions]="{standalone: true}"
+                  [ngModel]="username"
+                  id="username"
+                  type="text"
+                  pInputText
+                  placeholder="Scegli un username"
+                  variant="filled"/>
+              </div>
+              <div class="flex flex-column custom-input">
+                <h3>Luogo</h3>
+                <input
+                  id="basedId"
+                  type="text"
+                  pInputText
+                  placeholder="Dove vivi?"
+                  formControlName="basedId"
+                  variant="filled"/>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <div class="flex flex-column custom-input">
+                <h3>Skills</h3>
+                <p-chips
+                  formControlName="skills"
+                  variant="filled"
+                  id="skills"
+                  class="w-full custom-chips"
+                  placeholder="Inserisci una skill e premi Invio">
+                </p-chips>
+              </div>
+
+              <div class="flex flex-column custom-input">
+                <h3>Lingue conosciute</h3>
+                <p-chips
+                  formControlName="languages"
+                  variant="filled"
+                  id="languages"
+                  class="w-full custom-chips"
+                  placeholder="Inserisci una lingua e premi Invio">
+                </p-chips>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <div class="flex flex-column w-100">
+                <h3>Educazione</h3>
+                <textarea id="education"
+                          formControlName="education"
+                          placeholder="Raccontaci la tua formazione!"
+                          class="w-full"
+                          variant="filled"
+                          rows="5"
+                          cols="30"
+                          pInputTextarea
+                          [autoResize]="false">
+                </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p-divider></p-divider>
+
+        <div class="flex flex-column mb-3 w-100">
+          <h2>Dicci perché vuoi diventare un venditore!</h2>
+          <textarea id="description"
+                    formControlName="description"
+                    placeholder="Raccontaci qualcosa su di te!"
+                    variant="filled"
+                    rows="5"
+                    cols="30"
+                    pInputTextarea
+                    [autoResize]="false">
+          </textarea>
+        </div>
+
+        <div class="flex flex-column w-100">
+          <h2>Carica i tuoi lavori!</h2>
+          <file-picker-component (filesSelected)="onFilesSelected($event)"></file-picker-component>
+        </div>
+
+        <div class="d-flex justify-content-end mt-5">
+          <p-button label="Invia" type="submit"></p-button>
+        </div>
+      </form>
+    </p-card>
+  </div>
+
+  <div class="alert">
+    <p-toast></p-toast>
+  </div>
+</div>

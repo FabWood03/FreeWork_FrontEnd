@@ -1,0 +1,181 @@
+<app-navbar></app-navbar>
+
+<div class="page">
+  <div class="seller-page-container p-5">
+    <p-card styleClass="p-0">
+      <div class="user-info">
+        <div class="d-flex align-items-center">
+          <div class="d-flex w-100 align-items-center">
+            <p-avatar styleClass="avatar" [image]="getAvatarUrl(userData.imageFolderUrl)" shape="circle"/>
+            <div class="flex-column justify-content-center align-items-center ms-1 w-100">
+              <div class="d-flex w-100 align-items-center prova">
+                <p class="fw-semibold mb-0">{{ userData.name }} {{ userData.surname }}</p>
+                <i class="d-flex triangle-icon fa-solid fa-triangle-exclamation justify-content-end cursor-pointer"
+                   (click)="toggleDialog(userData.id)" style="color: #f78a51;"></i>
+              </div>
+              <div class="d-flex gap-3">
+                <p-rating [(ngModel)]="integerStarsValue" [readonly]="true" [cancel]="false" [stars]="5"></p-rating>
+                <span>{{ userData.rating | number:'1.2-2' }}/5</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="description-div mt-3">
+          @if (userData.bio != null) {
+            <span class="font-semibold">Bio</span>
+            <p>{{ userData.bio }}</p>
+          }
+        </div>
+        <p-divider></p-divider>
+        @if (userData.basedIn !== '') {
+          <div>
+            <i class="icon fa-solid fa-location-dot me-2"></i>
+            <span>{{ userData.basedIn }}</span>
+          </div>
+        }
+        @if (userData.languages.length !== 0) {
+          <div>
+            <i class="icon fa-solid fa-comment me-2"></i>
+            <span>{{ userData.languages }}</span>
+          </div>
+        }
+        <div>
+          <i class="icon fa-solid fa-envelope me-2"></i>
+          <span>{{ userData.email }}</span>
+        </div>
+      </div>
+    </p-card>
+
+    <div class="services-div mt-4">
+      @if (userData.role === 'SELLER' && userData.skills.length > 0) {
+        <h1 class="title">Competenze</h1>
+        <div class="d-flex align-items-center gap-2 my-4 flex-wrap">
+          @for (skills of userData.skills; track skills) {
+            <p-chip label="{{ skills }}"/>
+          }
+        </div>
+      }
+    </div>
+
+    <p-divider></p-divider>
+    <div class="services-div">
+      <h1 class="title">Servizi</h1>
+      @if (productCards.length > 0) {
+        <div class="services">
+          <p-carousel
+            [value]="productCards"
+            [showIndicators]="false"
+            [numVisible]="5"
+            [numScroll]="3"
+            [circular]="true"
+            [responsiveOptions]="responsiveOptions"
+            autoplayInterval="8000">
+            <ng-template let-productCard pTemplate="item">
+              <div class="auction d-flex p-3 align-items-center justify-content-center">
+                <a (click)="goToProduct(productCard.id)">
+                  <div class="cardCarousel">
+                    <app-card [card]="productCard" cardType="OtherUserProfileCard"></app-card>
+                  </div>
+                </a>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      } @else {
+        <div class="no-items-container d-flex align-items-center">
+          <div class="d-flex flex-column align-items-center">
+            <p class="no-items-message mt-1 font-italic">Non ci sono servizi disponibili al momento</p>
+            <div class="lottieGhost">
+              <ng-lottie class="lottie" [options]="lottieConfigGhost" width="20" height="20"></ng-lottie>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <p-divider></p-divider>
+    <div class="services-div mt-5">
+      <h1 class="title">Aste aperte</h1>
+      <div>
+        @if (auctionCards.length > 0) {
+          <div class="services">
+            <p-carousel
+              [value]="auctionCards"
+              [showIndicators]="false"
+              [numVisible]="5"
+              [numScroll]="3"
+              [circular]="true"
+              [responsiveOptions]="responsiveOptions"
+              autoplayInterval="8000">
+              <ng-template let-auctionCard pTemplate="item">
+                <div class="auction d-flex p-3 align-items-center justify-content-center">
+                  <a (click)="goToAuction(auctionCard.id)">
+                    <div class="cardCarousel">
+                      <app-card [card]="auctionCard"
+                                cardType="OtherUserProfileAuctionCard"></app-card>
+                    </div>
+                  </a>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </div>
+        } @else {
+          <div class="no-items-container d-flex align-items-center">
+            <div class="d-flex align-items-center">
+              <p class="no-items-message mt-1 font-italic">Non ci sono servizi disponibili al momento</p>
+              <div class="lottieGhost">
+                <ng-lottie class="lottie" [options]="lottieConfigGhost" width="20" height="20"></ng-lottie>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <p-divider></p-divider>
+      <div class="portfolio">
+        <h1 class="title">Portfolio</h1>
+
+        <div class="carosello">
+          @if (userData.portfolio && userData.portfolio.length > 0) {
+            <p-carousel [value]="getPortfolioUrls()" [numVisible]="3" [numScroll]="1" [circular]="true">
+              <ng-template pTemplate="item" let-image>
+                <img [src]="image" alt="Portfolio Image" class="carousel-image"/>
+              </ng-template>
+            </p-carousel>
+          } @else {
+            <p>Non ci sono immagini nel portfolio</p>
+          }
+        </div>
+      </div>
+
+
+      @if (userData.role === 'SELLER') {
+        @if (userData.id) {
+          <p-divider></p-divider>
+          <app-review-summary [userId]="userData.id"></app-review-summary>
+
+          <div class="reviews-section mt-5">
+            <div class="mb-5">
+              @for (review of userReviews; track review.id) {
+                <app-review [review]="review"></app-review>
+              } @empty {
+                <div class="flex justify-content-center align-items-center" style="height: 20vh;">
+                  <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+                  <p>Nessuna recensione relativa all'utente</p>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      }
+    </div>
+
+    <app-reporting
+      [userId]="userData.id"
+      [visible]="visible"
+      (submitUser)="handleUserSubmit($event)"
+      (closeDialog)="visible = $event">
+    </app-reporting>
+  </div>
+</div>

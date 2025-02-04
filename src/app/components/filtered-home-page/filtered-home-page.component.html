@@ -1,0 +1,180 @@
+<app-navbar></app-navbar>
+
+<div class="img-div">
+  <img src="../../../../assets/filteredHomePage.png" class="image" alt="Filtered-Home">
+</div>
+
+<div class="p-5 mb-5">
+  <div class="d-flex align-items-center justify-content-between">
+    <p-iconField iconPosition="left">
+      <p-inputIcon styleClass="pi pi-search"/>
+      <input type="text" class="searchbar rounded-4" pInputText [(ngModel)]="searchText" placeholder="Cerca"
+             (input)="applyFilters($event, 'search')"/>
+    </p-iconField>
+
+    <div class="flex align-items-center justify-content-end gap-5">
+      <div class="price-filter">
+        <p class="filter-label">Filtra per Prezzo</p>
+        <div class="slider-container">
+          <div class="input-fields">
+        <span class="p-input-icon-left">
+          <i class="pi pi-euro"></i>
+          <input type="number" pInputText
+                 [(ngModel)]="rangeValues[0]"
+                 (change)="validateRange()"
+                 class="price-input"
+                 placeholder="Min">
+        </span>
+
+            <span class="separator">-</span>
+
+            <span class="p-input-icon-left">
+          <i class="pi pi-euro"></i>
+          <input type="number" pInputText
+                 [(ngModel)]="rangeValues[1]"
+                 (change)="validateRange()"
+                 class="price-input"
+                 placeholder="Max">
+        </span>
+          </div>
+
+          <p-slider [(ngModel)]="rangeValues"
+                    [min]="0"
+                    [max]="3000"
+                    [range]="true"
+                    (onChange)="updateBudget($event)"
+                    class="custom-slider">
+          </p-slider>
+        </div>
+      </div>
+
+      <p-dropdown
+        [options]="subcategories"
+        [(ngModel)]="selectedSubCategoryId"
+        [checkmark]="true"
+        optionLabel="label"
+        optionValue="id"
+        filter="false"
+        [showClear]="true"
+        placeholder="Seleziona una categoria"
+        (onChange)="applyFilters($event, 'subcategory')">
+      </p-dropdown>
+    </div>
+
+  </div>
+</div>
+
+<div class="purple-box">
+  <div class="card-div p-5">
+    <p-card>
+      <h1>Risultati per la tua ricerca</h1>
+      <p-divider></p-divider>
+
+      <div class="d-flex flex-column gap-3">
+        <div class="auctions">
+          <div class="d-flex align-items-center">
+            <h2 class="orange-title">Aste del momento</h2>
+            <div class="lottieHourglass">
+              <ng-lottie class="lottieHourglass" [options]="lottieConfigHourglass"></ng-lottie>
+            </div>
+          </div>
+          @if (auctionCards.length > 0) {
+            <p-carousel
+              [value]="auctionCards"
+              [showIndicators]="false"
+              [numVisible]="3"
+              [numScroll]="3"
+              [circular]="true"
+              [responsiveOptions]="responsiveOptions"
+              autoplayInterval="8000">
+              <ng-template let-auctionCard pTemplate="item">
+                <div class="auction d-flex p-3 align-items-center justify-content-center">
+                  <a (click)="goToAuction(auctionCard.id)">
+                    <div class="cardCarousel">
+                      <app-card [card]="auctionCard" cardType="auctionCard"></app-card>
+                    </div>
+                  </a>
+                </div>
+              </ng-template>
+            </p-carousel>
+          } @else {
+            <div class="no-items-container d-flex align-items-center justify-content-center">
+              <div class="no-items-content text-center">
+                <ng-lottie class="lottie" [options]="lottieConfigEmptyListLens" width="60" height="60"></ng-lottie>
+                <p class="no-items-message mt-1">Non ci sono aste disponibili al momento.</p>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="products">
+          <h2 class="orange-title">Prodotti</h2>
+          @if (serviceCards.length > 0) {
+            <p-carousel
+              [value]="serviceCards"
+              [numVisible]="3"
+              [numScroll]="3"
+              [showIndicators]="false"
+              [circular]="true"
+              [responsiveOptions]="responsiveOptions"
+              autoplayInterval="8000">
+              <ng-template let-serviceCards pTemplate="item">
+                <div class="d-flex p-3 align-items-center justify-content-center">
+                  <div class="cardCarousel">
+                    <a (click)="goToProduct(serviceCards.id)">
+                      <app-card [card]="serviceCards" cardType="serviceCard"></app-card>
+                    </a>
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
+          } @else {
+            <div class="no-items-container d-flex align-items-center justify-content-center">
+              <div class="no-items-content text-center">
+                <ng-lottie class="lottie" [options]="lottieConfigEmptyListLens" width="60" height="60"></ng-lottie>
+                <p class="no-items-message mt-1">Non ci sono prodotti disponibili al momento.</p>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="future-auctions">
+          <div class="prova d-flex align-items-center align-content-center">
+            <h2 class="orange-title">Aste future</h2>
+            <div class="lottieComingSoon">
+              <ng-lottie class="lottieComingSoon" [options]="lottieConfigComingSoon"></ng-lottie>
+            </div>
+          </div>
+
+          @if (pendingAuctionCards.length > 0) {
+            <p-carousel
+              [value]="pendingAuctionCards"
+              [numVisible]="3"
+              [numScroll]="3"
+              [showIndicators]="false"
+              [circular]="true"
+              [responsiveOptions]="responsiveOptions"
+              autoplayInterval="8000">
+              <ng-template let-auctionCard pTemplate="item">
+                <div class="auction d-flex p-3 align-items-center justify-content-center">
+                  <a (click)="goToAuction(auctionCard.id)">
+                    <div class="cardCarousel">
+                      <app-card [card]="auctionCard" cardType="auctionCard"></app-card>
+                    </div>
+                  </a>
+                </div>
+              </ng-template>
+            </p-carousel>
+          } @else {
+            <div class="no-items-container d-flex align-items-center justify-content-center">
+              <div class="no-items-content text-center">
+                <ng-lottie class="lottie" [options]="lottieConfigEmptyListLens" width="60" height="60"></ng-lottie>
+                <p class="no-items-message mt-1">Non ci sono aste disponibili al momento.</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

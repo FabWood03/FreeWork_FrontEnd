@@ -1,0 +1,31 @@
+<p-dialog
+  header="Invia una segnalazione"
+  [draggable]="false"
+  [resizable]="false"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '50rem' }"
+  (onHide)="handleDialogClose()"
+>
+  <span class="p-text-secondary block mb-5">Le segnalazioni ci aiutano a mantenere la nostra comunità sicura e rispettosa.</span>
+  <div class="flex flex-column mb-3">
+    <label for="title">Titolo</label>
+    <input pInputText id="title" [(ngModel)]="title" variant="filled" />
+  </div>
+  <div class="flex flex-column mb-5">
+    <div>Descrizione</div>
+    <textarea
+      id="description"
+      class="textarea"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="description"
+      [autoResize]="false"
+    ></textarea>
+  </div>
+  <div class="flex justify-content-end gap-2">
+    <p-button class="cancel-button" label="Indietro" (onClick)="visible = false"></p-button>
+    <p-button class="done-button" label="Invia" (onClick)="onSubmit()"></p-button>
+  </div>
+</p-dialog>

@@ -1,0 +1,169 @@
+@if (!isLoading) {
+  <app-navbar></app-navbar>
+  <div class="container-fluid p-0 pt-5 mb-5">
+    <div class="row search-row mx-auto">
+      <div class="col-lg-6 d-flex align-items-end justify-content-center flex-column">
+        <div class="typewriting-container">
+          <h1 class="initial-title ml6">
+            <span #typewriterElement id="typewriter" class="text-wrapper"></span>
+          </h1>
+        </div>
+        <app-search-bar class="w-100 mb-5" (searchTextChanged)="onSearch($event)"></app-search-bar>
+      </div>
+      <div class="col-lg-6 d-flex align-items-center justify-content-center d-none d-lg-flex">
+        <div class="rectangle rounded-4">
+          <img ngSrc="assets/homepage_freepick_image.jpeg" class="img-fluid position-relative rounded-4 image-home"
+               alt="homepage-image" width="420" height="320" priority>
+        </div>
+      </div>
+    </div>
+
+    <div class="categories-container d-grid">
+      <ul class="categories-menu">
+        @for (category of categories; let i = $index; track category.label) {
+          <li class="category-item" (mouseenter)="onCategoryMouseEnter(category, i)"
+              (mouseleave)="onMouseLeave('category')">
+            {{ category.label }}
+          </li>
+        }
+      </ul>
+
+      <!-- Pannello delle sottocategorie -->
+      @if (activeSubcategories) {
+        <div
+          class="subcategories-popup"
+          [ngStyle]="subcategoryPosition"
+          (mouseenter)="onMouseEnter('popup')"
+          (mouseleave)="onMouseLeave('popup')"
+        >
+          <div class="subcategory-columns">
+            @for (chunk of getChunkedSubcategories(activeSubcategories); track chunk[0].id) {
+              <div class="subcategory-column">
+                <ul>
+                  @for (subcategory of chunk; track subcategory.id) {
+                    <li (click)="onSubcategoryClick(subcategory.id)">{{ subcategory.name }}</li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        </div>
+      }
+      <div style="width: 100%; height: 100%; border: 2px #87419E solid"></div>
+    </div>
+
+    <div class="d-flex align-items-center mt-8">
+      <h1 class="categories">Aste del momento</h1>
+      <div class="lottieHourglass">
+        <ng-lottie class="lottieHourglass" [options]="lottieConfigs.hourglass"></ng-lottie>
+      </div>
+    </div>
+
+    @if (auctionCards.length > 0) {
+      <div class="auction">
+        <p-carousel
+          [value]="auctionCards"
+          [showIndicators]="false"
+          [numVisible]="5"
+          [numScroll]="1"
+          [circular]="false"
+          [responsiveOptions]="responsiveOptions"
+          autoplayInterval="8000">
+          <ng-template let-auctionCard pTemplate="item">
+            <div class="auction d-flex p-3 align-items-center justify-content-center">
+              <a (click)="goToAuction(auctionCard.id)">
+                <div class="cardCarousel">
+                  <app-card [card]="auctionCard" cardType="auctionCard"></app-card>
+                </div>
+              </a>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    } @else {
+      <div class="no-items-container d-flex align-items-center justify-content-center">
+        <div class="no-items-content text-center">
+          <ng-lottie class="lottie" [options]="lottieConfigs.emptyList" width="60" height="60"></ng-lottie>
+          <p class="no-items-message mt-1">Non ci sono aste disponibili al momento.</p>
+        </div>
+      </div>
+    }
+
+    <h1 class="categories mt-5">I migliori servizi per te</h1>
+    @if (serviceCards.length > 0) {
+      <div>
+        <p-carousel
+          [value]="serviceCards"
+          [showIndicators]="false"
+          [numVisible]="5"
+          [numScroll]="1"
+          [circular]="false"
+          [responsiveOptions]="responsiveOptions"
+          autoplayInterval="8000">
+          <ng-template let-serviceCards pTemplate="item">
+            <div class="d-flex p-3 align-items-center justify-content-center">
+              <div class="cardCarousel">
+                <a (click)="goToProduct(serviceCards.id)">
+                  <app-card [card]="serviceCards" cardType="serviceCard"></app-card>
+                </a>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    } @else {
+      <div class="no-items-container d-flex align-items-center justify-content-center">
+        <div class="no-items-content text-center">
+          <ng-lottie class="lottie" [options]="lottieConfigs.emptyList" width="60" height="60"></ng-lottie>
+          <p class="no-items-message mt-1">Non ci sono prodotti disponibili al momento.</p>
+        </div>
+      </div>
+    }
+
+    <div class="prova d-flex align-items-center align-content-center mt-8">
+      <h1 class="categories">Aste future</h1>
+      <div class="lottieComingSoon">
+        <ng-lottie class="lottieComingSoon" [options]="lottieConfigs.comingSoon"></ng-lottie>
+      </div>
+    </div>
+
+    @if (auctionCards.length > 0) {
+      <div class="auction">
+        <p-carousel
+          [value]="pendingAuctionCards"
+          [showIndicators]="false"
+          [numVisible]="5"
+          [numScroll]="1"
+          [circular]="false"
+          [responsiveOptions]="responsiveOptions"
+          autoplayInterval="8000">
+          <ng-template let-auctionCard pTemplate="item">
+            <div class="auction d-flex p-3 align-items-center justify-content-center">
+              <a (click)="goToAuction(auctionCard.id)">
+                <div class="cardCarousel">
+                  <app-card [card]="auctionCard" cardType="auctionCard"></app-card>
+                </div>
+              </a>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    } @else {
+      <div class="no-items-container d-flex align-items-center justify-content-center">
+        <div class="no-items-content text-center">
+          <ng-lottie class="lottie" [options]="lottieConfigs.emptyList" width="60" height="60"></ng-lottie>
+          <p class="no-items-message mt-1">Non ci sono aste disponibili al momento.</p>
+        </div>
+      </div>
+    }
+  </div>
+} @else if (isLoading) {
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <ng-lottie class="lottie" [options]="lottieConfigs.loadingPage" width="60" height="60"></ng-lottie>
+    <span class="visually-hidden">Loading...</span>
+  </div>
+}
+
+
+
+

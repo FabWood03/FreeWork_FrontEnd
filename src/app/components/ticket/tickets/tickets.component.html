@@ -1,0 +1,108 @@
+<app-navbar></app-navbar>
+
+<div class="page p-4">
+
+  <h1>Ticket</h1>
+  <p-card>
+
+    <div class="filter-div d-flex justify-content-between align-items-center p-3">
+      <div class="mb-3">
+        <p-iconField iconPosition="left">
+          <p-inputIcon styleClass="pi pi-search"/>
+          <input type="text" class="searchbar rounded-4" pInputText [(ngModel)]="searchText" placeholder="Cerca"
+                 (input)="applyFilters()"/>
+        </p-iconField>
+      </div>
+
+
+      <div class="add-row-dropdown d-flex align-items-center gap-3">
+        <div class="arrows d-flex gap-1" (click)="toggleSortOrder()">
+          <i class="fa-solid fa-arrow-up"></i>
+          <i class="fa-solid fa-arrow-down"></i>
+        </div>
+
+        <p-multiSelect
+          [options]="categories"
+          [(ngModel)]="selectedCategories"
+          filter="false"
+          selectedItemsLabel="{0} categorie selezionate"
+          optionLabel="label"
+          placeholder="Seleziona categorie"
+          (onChange)="applyFilters()">
+        </p-multiSelect>
+
+        <div class="status">
+          <p-dropdown
+            [options]="priorities"
+            [(ngModel)]="selectedPriority"
+            [checkmark]="true"
+            optionLabel="label"
+            [showClear]="true"
+            placeholder="Priorità"
+            (onChange)="applyFilters()">
+          </p-dropdown>
+        </div>
+
+        <div class="time">
+          <p-dropdown
+            [options]="timeRanges"
+            [(ngModel)]="selectedTimeRange"
+            [checkmark]="true"
+            optionLabel="label"
+            [showClear]="true"
+            placeholder="Intervallo di tempo"
+            (onChange)="applyFilters()">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <p-tabView>
+      <p-tabPanel header="Tutti i ticket">
+        @for (ticket of tickets; track ticket.id) {
+          <app-single-ticket [singleTicket]="ticket"></app-single-ticket>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyTickets" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ticket disponibili.</p>
+          </div>
+        }
+      </p-tabPanel>
+      <p-tabPanel header="Nuovi">
+        @for (ticket of pendingTickets; track ticket.id) {
+          <app-single-ticket [singleTicket]="ticket"></app-single-ticket>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyTickets" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ticket in stato di attesa.</p>
+          </div>
+        }
+
+      </p-tabPanel>
+      <p-tabPanel header="In elaborazione">
+        @for (ticket of takeOnTickets; track ticket.id) {
+          <app-single-ticket [singleTicket]="ticket"></app-single-ticket>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyTickets" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ticket in stato di elaborazione.</p>
+          </div>
+        }
+
+
+      </p-tabPanel>
+      <p-tabPanel header="Risolti">
+        @for (ticket of resolvedTickets; track ticket.id) {
+          <app-single-ticket [singleTicket]="ticket"></app-single-ticket>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyTickets" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ticket risolti.</p>
+          </div>
+        }
+      </p-tabPanel>
+    </p-tabView>
+  </p-card>
+</div>
+
+

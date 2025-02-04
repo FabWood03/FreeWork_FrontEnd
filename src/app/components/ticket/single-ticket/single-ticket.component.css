@@ -1,0 +1,30 @@
+.p-panel {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.p-panel:not(.p-panel-expanded) .p-panel-header {
+  border-radius: 25px;
+}
+
+.panel-content {
+  padding: 8px;
+}
+
+.ticket-title {
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.open-single-ticket {
+  color: #87419E;
+}
+
+.open-single-ticket:hover {
+  cursor: pointer;
+  border-bottom: 1px solid #87419E;
+}

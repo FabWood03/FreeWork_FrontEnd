@@ -1,0 +1,59 @@
+.product-image {
+  object-fit: cover;
+}
+
+.order-product {
+  width: 350px;
+  align-items: center;
+}
+
+.information {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  width: 180px;
+}
+
+.purple-color {
+  color: #87419E;
+}
+
+.green-color {
+  color: #00A170;
+}
+
+.grey-color {
+  color: #757575;
+}
+
+.p-panel {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 25px;
+}
+
+.review-image {
+  display: flex;
+  width: 35%;
+}
+
+.p-dialog {
+  border: #87419E 2px solid;
+  border-radius: 30px;
+  width: 50%;
+}
+
+.p-dialog-content {
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.p-dialog-header {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+/*.p-button {*/
+/*  background-color: #F78A51;*/
+/*  border: none;*/
+/*}*/
+

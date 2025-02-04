@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+
+@if (!isLoading) {
+  <div class="page p-4">
+    <p-card class="card-div bg-white">
+      <p-header>
+        <div class="p-1 d-flex justify-content-between">
+          <div>
+            <div class="d-flex align-items-center p-1 mt-3 ml-4">
+              <p-avatar [image]="getAvatarUrl(ticketData.userPhoto)" shape="circle"/>
+              <span class="font-bold ml-2">Ticket# {{ ticketData.id }}</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center mt-3 mr-3">
+            <span>Postato alle {{ ticketData.creationDate }}</span>
+          </div>
+        </div>
+      </p-header>
+
+      <div class="ml-3">
+        <h5>{{ ticketData.title }}</h5>
+        <p>{{ ticketData.description }}</p>
+      </div>
+
+      <p-card class="answer">
+        <h5>Rispondi al ticket</h5>
+
+        <div class="d-flex flex-wrap gap-3 mb-3">
+          <div class="d-flex align-items-center">
+            <p-radioButton
+              name="status"
+              value="Accettato"
+              [(ngModel)]="ticketStatus"
+              inputId="status1"/>
+            <label for="status1" class="ml-2">Accetta</label>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <p-radioButton
+              name="status"
+              value="Rifiutato"
+              [(ngModel)]="ticketStatus"
+              inputId="status2"/>
+            <label for="status2" class="ml-2">Rifiuta</label>
+          </div>
+        </div>
+
+        <span>Descrizione</span>
+        <textarea
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [(ngModel)]="ticketDescription">
+  </textarea>
+
+        <div class="done-button d-flex justify-content-end mt-3">
+          <p-button (click)="onSubmitResponse()">Rispondi</p-button>
+        </div>
+      </p-card>
+      <div class="back-button d-flex justify-content-end mt-3" (click)="goToTickets()">
+        <p-button>Indietro</p-button>
+      </div>
+    </p-card>
+  </div>
+} @else if (isLoading) {
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <ng-lottie class="lottie" [options]="lottieConfigLoadingPage" width="60" height="60"></ng-lottie>
+    <span class="visually-hidden">Loading...</span>
+  </div>
+}

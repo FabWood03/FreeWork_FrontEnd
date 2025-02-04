@@ -1,0 +1,117 @@
+.package-card {
+  top: 50px;
+  width: 600px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  padding: 1.2em;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.package-tabs .ui-tabview-nav {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2px solid #ddd;
+}
+
+.package-tabs .ui-tabview-nav li {
+  font-weight: bold;
+  color: #F78A51;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.p-tabview .p-tabview-panels {
+  overflow-y: auto;  /* Aggiunge uno scroll verticale se il contenuto supera l'altezza */
+  max-height: 100%;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  color: #F78A51;
+  border-color: #F78A51;
+}
+
+.package-tabs .ui-tabview-nav li:hover {
+  color: #F78A51;
+}
+
+.package-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.package-content h3 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.package-content p {
+  margin: 10px 0;
+  color: #444;
+}
+
+.package-content p small {
+  color: #888;
+}
+
+.package-content .details {
+  list-style: none;
+  margin: 12px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+}
+
+.package-content .details li {
+  margin: 6px 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.package-content .btn-primary {
+  background-color: #F78A51;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 13px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.package-content .btn-primary:hover {
+  background-color: #F78A51;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.attributes-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.attribute {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.fa-check {
+  color: #F78A51;
+  font-size: 1.2rem;
+}
+
+.p-toast {
+  z-index: 9999 !important; /* Assicura che sia sempre sopra a tutto */
+}
+
+.lottie {
+  width: 10em;
+  height: 10em;
+}
+

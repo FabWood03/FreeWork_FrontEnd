@@ -1,0 +1,101 @@
+<app-navbar></app-navbar>
+<div class="container-fluid position-relative mb-5">
+  <div class="title-box">
+    <h1 class="my-2">Carrello</h1>
+
+    <button (click)="showDescriptionDialog()" [disabled]="!checkIfCartIsNotEmpty()" class="btn mb-5 confirm-order" id="confirm-button">Conferma ordine
+    </button>
+  </div>
+
+  <img ngSrc="../../../assets/freepik__upload__51263.jpeg" class="position-absolute start-50 translate-middle mt-8"
+       height="900" width="900" alt="cart-image" style="z-index: -1; opacity: 0.3;" priority>
+
+  <div class="d-flex justify-content-center">
+    <div class="card shadow-lg p-4 rounded-5 mb-5">
+      <h2 class="card-title mb-4">Ordine</h2>
+      <div class="upper-line"></div>
+      <div class="table-responsive">
+        <table class="table table-borderless rounded-5">
+          <thead>
+          <tr>
+            <th scope="col" class="text-start">PRODOTTO</th>
+            <th scope="col">PACCHETTO</th>
+            <th scope="col">PREZZO</th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (purchasedProduct of cart?.purchasedProducts; track purchasedProduct.id; let idx = $index) {
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <!-- Immagine del prodotto con dimensioni ridotte -->
+                    <img [src]="apiBaseUrl + purchasedProduct?.productImagePhoto || 'assets/fotoCard.jpeg'"
+                         class="photo rounded-4 me-3" height="150" width="250"
+                         alt="Immagine card"
+                         loading="lazy"/>
+
+                    <div class="d-flex flex-column">
+                      <span class="fw-bold">{{ purchasedProduct.productTitle }}</span>
+                      <span>
+                        <span>{{ purchasedProduct.userName }}</span>
+                        <span class="ms-1">{{ purchasedProduct.userSurname }}</span>
+                      </span>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="fw-bold ">{{ purchasedProduct.type }}</td>
+                <td class="fw-bold">€{{ purchasedProduct.price }}</td>
+                <td><i (click)="removePurchasedProduct(purchasedProduct.id, idx)"
+                       class="fa-solid fa-trash fa-lg me-5"></i></td>
+              </tr>
+            } @empty {
+              <td colspan="4" class="text-center py-5">
+                <ng-lottie class="lottie" [options]="lottieConfig" width="50" height="50"></ng-lottie>
+                <h4 class="mt-3 text-muted">Il carrello è vuoto</h4>
+                <p class="text-muted">Aggiungi dei servizi per iniziare a fare acquisti!</p>
+              </td>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="bottom-line"></div>
+      <div class="mt-3 text-end me-5">
+        <h5>Totale: <strong>€{{ total }}</strong></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Personalizza il tuo ordine"
+          [(visible)]="addDescriptionFlag"
+          [modal]="true"
+          [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+          [draggable]="false"
+          [resizable]="false">
+  <p>Fornisci dettagli sul tuo ordine per consentire al venditore di creare un prodotto su misura per te!</p>
+  <p-divider/>
+  @for (purchasedProduct of cart?.purchasedProducts; track purchasedProduct.id) {
+    <div class="offer-form">
+      <div class="d-flex flex-column justify-content-center mb-4">
+        <p class="font-bold">Prodotto: {{ purchasedProduct.productTitle }}</p>
+        <p class="font-bold">Tipo: {{ purchasedProduct.type }}</p>
+        <p>Descrizione</p>
+        <textarea id="description-{{ purchasedProduct.id }}"
+                  rows="5"
+                  cols="30"
+                  placeholder="Descrivi il tuo ordine per questo prodotto"
+                  pInputTextarea
+                  [(ngModel)]="descriptions[purchasedProduct.id]"
+                  [autoResize]="false">
+        </textarea>
+      </div>
+    </div>
+    <p-divider></p-divider>
+  }
+  <div class="d-flex justify-content-center rounded-3">
+    <p-button class="confirm-order" label="Completa ordine" (onClick)="createOrder()"></p-button>
+  </div>
+</p-dialog>
+
+<p-toast></p-toast>

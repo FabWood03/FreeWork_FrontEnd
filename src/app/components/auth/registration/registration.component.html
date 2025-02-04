@@ -1,0 +1,85 @@
+<!--Schermo-->
+<div class="container-fluid d-flex justify-content-center align-items-center position-relative">
+
+  <!-- Box di avviso -->
+  <div class="alert alert-danger z-3" *ngIf="showAlert" id="alertBox" role="alert">
+    Si è verificato un errore durante la registrazione. Riprova.
+  </div>
+
+  <!--Card-->
+  <div class="card rounded-5 p-4 position-relative w-100 bg-white fade-in">
+
+    <!--Forma geometrica in alto a sx-->
+    <div class="ellipse-1_4-4 d-none d-xxl-block">
+      <svg width="550" height="550" viewBox="0 0 609 452" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M549 206.547C411 233.547 396.924 459.01 189.424 451.51C-18.0764 444.01 0.423662 173.257 0.423662 112.292C0.423662 51.3272 139.439 1.90522 310.924 1.90522C577.924 -21.5948 687 179.547 549 206.547Z"
+          fill="#87419E"/>
+      </svg>
+    </div>
+
+    <!--Serve per strutturare la griglia e crea una riga che poi ha 2 colonne-->
+    <div class="d-flex">
+
+      <!--Parte sx della card e 1 colonna-->
+      <div class="col-md-6 d-grid justify-content-center">
+        <img ngSrc="../../../../assets/registration_freepick_image.jpeg" class="img-fluid" alt="Responsive image"
+             height="550" width="550"/>
+        <h1 class="text-center title">FreeWork</h1>
+      </div>
+
+      <!--Parte dx della card e 2 colonna-->
+      <div class="form-div col-md-6 d-flex flex-column justify-content-center align-items-center">
+        <h1 class="text-center title-header">Benvenuto!</h1>
+
+        <!--Form-->
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="w-75 d-flex flex-column gap-1">
+
+          <!--Nome e Cognome-->
+          <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column w-100">
+              <label for="name" class="form-class">Nome</label>
+              <input formControlName="name" type="text" class="form-control border-2 mr-1 mt-1" id="name"
+                     placeholder="Inserisci il tuo nome" required>
+            </div>
+            <div class="d-flex flex-column w-100">
+              <label for="surname" class="form-class">Cognome</label>
+              <input formControlName="surname" type="text" class="form-control border-2 ml-1 mt-1" id="surname"
+                     placeholder="Inserisci il tuo cognome" required>
+            </div>
+          </div>
+
+          <!--Username, email, password-->
+          <label for="nickname" class="form-class">Username</label>
+          <input formControlName="nickname" type="text" class="form-control border-2" id="nickname"
+                 placeholder="Inserisci lo username" required>
+
+          <label for="email" class="form-class">Email</label>
+          <input formControlName="email" type="email" class="form-control border-2" id="email"
+                 placeholder="Inserisci la tua email" required>
+
+          <label for="password" class="form-class">Password</label>
+          <input formControlName="password" type="password" class="form-control border-2" id="password"
+                 placeholder="Inserisci la tua password" required>
+
+          <!--          <span>Password</span>-->
+          <!--          <p-password [(ngModel)]="password" [feedback]="false" [toggleMask]="true" />-->
+
+          <button type="submit" class="btn btn-primary w-100 mt-3">Registrati</button>
+
+        </form>
+        <p class="mt-3 text-center">Hai già un account? <a [routerLink]="['/sign-in']" class="link-class">Accedi</a>
+        </p>
+      </div>
+    </div>
+
+    <!--Forma geometrica in basso a dx-->
+    <div class="ellipse-2_1-2 d-none d-xxl-block">
+      <svg width="536" height="490" viewBox="0 0 536 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M296.5 105.215C192.5 362.715 -6.10352e-05 225.283 -6.10352e-05 395.752C-6.10352e-05 566.221 349.826 453.252 420.541 453.252C491.256 453.252 532.541 547.221 532.541 376.752C559.8 111.333 400.5 -152.285 296.5 105.215Z"
+          fill="#87419E"/>
+      </svg>
+    </div>
+  </div>
+</div>

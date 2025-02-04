@@ -1,0 +1,234 @@
+<app-navbar></app-navbar>
+
+<div class="page p-4">
+  <h1>Visualizzazione utenti</h1>
+
+  <p-card>
+    <div class="filter-div d-flex justify-content-between align-items-center p-3">
+      <div class="mb-3">
+        <p-iconField iconPosition="left">
+          <p-inputIcon styleClass="pi pi-search"/>
+          <input type="text" class="searchbar rounded-4" pInputText placeholder="Cerca" [(ngModel)]="searchText" (input)="applyFilter()"/>
+        </p-iconField>
+      </div>
+    </div>
+
+    <p-contextMenu #cm [model]="items"/>
+
+    <p-tabView>
+      <p-tabPanel header="Tutti gli utenti">
+        <ul class="m-0 p-0 list-none surface-border border-round flex flex-column gap-2 w-full">
+          @for (user of users; track user.id) {
+            <li
+              [class]="[
+            'p-3',
+            'hover:surface-hover',
+            'border-round',
+            'border-1',
+            'border-transparent',
+            'transition-all',
+            'transition-duration-200',
+            'flex',
+            'align-items-center',
+            'justify-content-between',
+            selectedUser?.id === user?.id ? 'border-primary' : ''
+        ]"
+              (contextmenu)="onContextMenu($event, user)">
+              <div class="flex align-items-center gap-2">
+                <img class="avatar" [alt]="user.name" [src]="getAvatarUrl(user.imageFolderUrl)"/>
+                <span class="font-bold">
+                  {{ user.name }} {{ user.surname }}
+                </span>
+              </div>
+              <p-tag [value]="user.role" [severity]="getBadge(user)"/>
+            </li>
+          } @empty {
+            <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+              <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+              <p>Nessun utente disponibile al momento</p>
+            </div>
+          }
+
+        </ul>
+      </p-tabPanel>
+      <p-tabPanel header="Admin">
+        <ul class="m-0 p-0 list-none surface-border border-round flex flex-column gap-2 w-full">
+          @for (user of admins; track user.id) {
+            <li
+              [class]="[
+            'p-3',
+            'hover:surface-hover',
+            'border-round',
+            'border-1',
+            'border-transparent',
+            'transition-all',
+            'transition-duration-200',
+            'flex',
+            'align-items-center',
+            'justify-content-between',
+            selectedUser?.id === user?.id ? 'border-primary' : ''
+        ]"
+              (contextmenu)="onContextMenu($event, user)">
+              <div class="flex align-items-center gap-2">
+                <img class="avatar" [alt]="user.name" [src]="getAvatarUrl(user.imageFolderUrl)"/>
+                <span class="font-bold">
+                  {{ user.name }} {{ user.surname }}
+                </span>
+              </div>
+              <p-tag [value]="user.role" [severity]="getBadge(user)"/>
+            </li>
+          } @empty {
+            <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+              <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+              <p>Nessun amministratore disponibile al momento</p>
+            </div>
+          }
+
+        </ul>
+      </p-tabPanel>
+      <p-tabPanel header="Moderatori">
+        <ul class="m-0 p-0 list-none surface-border border-round flex flex-column gap-2 w-full">
+          @for (user of moderators; track user.id) {
+            <li
+              [class]="[
+            'p-3',
+            'hover:surface-hover',
+            'border-round',
+            'border-1',
+            'border-transparent',
+            'transition-all',
+            'transition-duration-200',
+            'flex',
+            'align-items-center',
+            'justify-content-between',
+            selectedUser?.id === user?.id ? 'border-primary' : ''
+        ]"
+              (contextmenu)="onContextMenu($event, user)">
+              <div class="flex align-items-center gap-2">
+                <img class="avatar" [alt]="user.name" [src]="getAvatarUrl(user.imageFolderUrl)"/>
+                <span class="font-bold">
+                  {{ user.name }} {{ user.surname }}
+                </span>
+              </div>
+              <p-tag [value]="user.role" [severity]="getBadge(user)"/>
+            </li>
+          } @empty {
+            <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+              <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+              <p>Nessun moderatore disponibile al momento</p>
+            </div>
+          }
+
+        </ul>
+      </p-tabPanel>
+      <p-tabPanel header="Venditori">
+        <ul class="m-0 p-0 list-none surface-border border-round flex flex-column gap-2 w-full">
+          @for (user of sellers; track user.id) {
+            <li
+              [class]="[
+            'p-3',
+            'hover:surface-hover',
+            'border-round',
+            'border-1',
+            'border-transparent',
+            'transition-all',
+            'transition-duration-200',
+            'flex',
+            'align-items-center',
+            'justify-content-between',
+            selectedUser?.id === user?.id ? 'border-primary' : ''
+        ]"
+              (contextmenu)="onContextMenu($event, user)">
+              <div class="flex align-items-center gap-2">
+                <img class="avatar" [alt]="user.name" [src]="getAvatarUrl(user.imageFolderUrl)"/>
+                <span class="font-bold">
+                  {{ user.name }} {{ user.surname }}
+                </span>
+              </div>
+              <p-tag [value]="user.role" [severity]="getBadge(user)"/>
+            </li>
+          } @empty {
+            <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+              <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+              <p>Nessun venditore disponibile al momento</p>
+            </div>
+          }
+
+        </ul>
+      </p-tabPanel>
+      <p-tabPanel header="Acquirenti">
+        <ul class="m-0 p-0 list-none surface-border border-round flex flex-column gap-2 w-full">
+          @for (user of buyers; track user.id) {
+            <li
+              [class]="[
+            'p-3',
+            'hover:surface-hover',
+            'border-round',
+            'border-1',
+            'border-transparent',
+            'transition-all',
+            'transition-duration-200',
+            'flex',
+            'align-items-center',
+            'justify-content-between',
+            selectedUser?.id === user?.id ? 'border-primary' : ''
+        ]"
+              (contextmenu)="onContextMenu($event, user)">
+              <div class="flex align-items-center gap-2">
+                <img class="avatar" [alt]="user.name" [src]="getAvatarUrl(user.imageFolderUrl)"/>
+                <span class="font-bold">
+                  {{ user.name }} {{ user.surname }}
+                </span>
+              </div>
+              <p-tag [value]="user.role" [severity]="getBadge(user)"/>
+            </li>
+          } @empty {
+            <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+              <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+              <p>Nessun acquirente disponibile al momento/p>
+            </div>
+          }
+
+        </ul>
+      </p-tabPanel>
+      <p-tabPanel header="Account limitati">
+        <ul class="m-0 p-0 list-none surface-border border-round flex flex-column gap-2 w-full">
+          @for (user of limitedAccounts; track user.id) {
+            <li
+              [class]="[
+            'p-3',
+            'hover:surface-hover',
+            'border-round',
+            'border-1',
+            'border-transparent',
+            'transition-all',
+            'transition-duration-200',
+            'flex',
+            'align-items-center',
+            'justify-content-between',
+            selectedUser?.id === user?.id ? 'border-primary' : ''
+        ]"
+              (contextmenu)="onContextMenu($event, user)">
+              <div class="flex align-items-center gap-2">
+                <img class="avatar" [alt]="user.name" [src]="getAvatarUrl(user.imageFolderUrl)"/>
+                <span class="font-bold">
+                  {{ user.name }} {{ user.surname }}
+                </span>
+              </div>
+              <p-tag [value]="user.role" [severity]="getBadge(user)"/>
+            </li>
+          } @empty {
+            <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+              <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+              <p>Nessun account limitato al momento disponibile</p>
+            </div>
+          }
+
+        </ul>
+      </p-tabPanel>
+    </p-tabView>
+  </p-card>
+</div>
+
+<p-toast/>
+

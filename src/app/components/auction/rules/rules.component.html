@@ -1,0 +1,56 @@
+<div class="seller-page-container">
+  <p-button styleClass="p-button-custom" (onClick)="showDialog()" label="Regole dell'asta"/>
+  <p-dialog
+    header="Regole dell'asta"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [(visible)]="visible"
+    [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <h4>Rispetto dei Tempi di Consegna</h4>
+    <p class="margin-div">
+      I tempi di consegna indicati dal venditore nella sua proposta devono essere rispettati. Qualsiasi ritardo deve
+      essere comunicato tempestivamente al cliente e giustificato. Ritardi ripetuti o ingiustificati possono comportare
+      penalizzazioni o la rimozione dal marketplace.
+    </p>
+
+    <h4>Rinegoziazione dei Termini di Consegna</h4>
+    <p class="margin-div">
+      Se un venditore ritiene di non poter rispettare i tempi di consegna originali proposti dal cliente, può presentare
+      una controproposta, specificando tempi rinegoziati. Tuttavia, una volta accettati dal cliente, i nuovi termini
+      diventano vincolanti.
+    </p>
+
+    <h4>Qualità del Lavoro</h4>
+    <p class="margin-div">
+      Il lavoro consegnato deve rispettare gli standard di qualità stabiliti nella descrizione del progetto e nella
+      proposta del venditore. La qualità scadente o inferiore alle aspettative può comportare una valutazione negativa o
+      la richiesta di revisione da parte del cliente.
+    </p>
+
+    <h4>Revisione del Lavoro</h4>
+    <p class="margin-div">
+      Se il cliente non è soddisfatto del lavoro consegnato, ha diritto a richiedere revisioni entro i termini previsti
+      dall’accordo. Il venditore dovrà apportare le modifiche richieste entro un tempo ragionevole.
+    </p>
+
+    <h4>Trasparenza nei Prezzi</h4>
+    <p class="margin-div">
+      I venditori devono essere trasparenti sui prezzi proposti e non aggiungere costi nascosti. Qualsiasi modifica ai
+      costi deve essere discussa e approvata dal cliente prima dell'inizio del lavoro.
+    </p>
+
+    <h4>Nessuna Plagio o Violazione del Copyright</h4>
+    <p>
+      I venditori devono garantire che tutto il lavoro consegnato sia originale e non violi alcun copyright. Il plagio o
+      l'uso non autorizzato di materiale protetto comporterà la sospensione immediata dal servizio.
+    </p>
+
+    <h4>Riservatezza delle Informazioni</h4>
+    <p>
+      Le informazioni condivise tra cliente e venditore devono rimanere riservate e non essere divulgate a terzi senza
+      consenso esplicito. Questo include dettagli del progetto e qualsiasi informazione personale o commerciale
+      sensibile. </p>
+  </p-dialog>
+</div>

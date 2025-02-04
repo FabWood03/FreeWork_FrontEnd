@@ -1,0 +1,74 @@
+.card {
+  border-radius: 20px; /* Arrotondamento dei bordi della card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aggiunge un'ombreggiatura leggera */
+  overflow: hidden; /* Nasconde il contenuto fuori dai bordi */
+  background-color: #ffffff; /* Sfondo bianco */
+  transition: transform 0.2s, box-shadow 0.2s; /* Aggiunge transizioni per hover */
+}
+
+.p-fileupload-content {
+  border-radius: 20px; /* Arrotonda il contenuto */
+  padding: 1rem; /* Margine interno */
+  background-color: #f9f9f9; /* Colore di sfondo tenue */
+  border: 1px dashed #ccc; /* Stile del bordo */
+}
+
+.p-button {
+  border-radius: 8px; /* Arrotonda i pulsanti */
+  padding: 0.5rem 1rem; /* Margine interno pulsanti */
+}
+
+.p-button[severity="danger"] {
+  background-color: #ff4d4d; /* Colore rosso per pulsanti di pericolo */
+  border-color: #ff4d4d;
+  color: white;
+}
+
+.p-button[severity="danger"]:hover {
+  background-color: #cc0000; /* Cambia colore al passaggio del mouse */
+  border-color: #cc0000;
+}
+
+img {
+  border-radius: 8px; /* Arrotonda gli angoli delle anteprime */
+  border: 1px solid #ccc; /* Aggiunge un bordo */
+  padding: 2px;
+}
+
+.p-fileupload-empty {
+  background-color: #f0f0f0; /* Sfondo neutro */
+  padding: 2rem; /* Margine interno per la sezione vuota */
+  border-radius: 20px; /* Arrotonda i bordi */
+  text-align: center;
+}
+
+.p-fileupload-empty i {
+  color: #aaa; /* Colore dell'icona */
+  transition: color 0.2s;
+}
+
+.p-fileupload-empty:hover i {
+  color: #666; /* Cambia colore dell'icona al passaggio del mouse */
+}
+
+.p-fileupload-empty p {
+  font-size: 1rem; /* Dimensione del testo */
+  color: #666;
+}
+
+.flex .card {
+  border: 1px solid #eee; /* Aggiunge un bordo sottile */
+  background-color: #fff; /* Sfondo bianco */
+  border-radius: 12px; /* Arrotonda i bordi */
+  padding: 1rem; /* Margine interno */
+  text-align: center; /* Centra il contenuto */
+}
+
+.flex .card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombreggiatura al passaggio del mouse */
+}
+
+span.font-semibold {
+  font-size: 0.9rem; /* Dimensione del testo */
+  font-weight: 600; /* Grassetto */
+}

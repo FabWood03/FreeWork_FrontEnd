@@ -1,0 +1,54 @@
+<div class="review-summary mt-5">
+  <h2 class="description">Recensioni</h2>
+  <div class="d-flex">
+    <div class="reviews d-grid mr-5 mt-2">
+      <!-- Mostra la media delle recensioni come intero (senza decimali) -->
+      <span class="rating-number text-center">{{ stars | number:'1.1-1' }}</span>
+      <!-- Mostra la valutazione in formato stelle con mezze stelle, ma solo parte intera -->
+      <p-rating [(ngModel)]="integerStarsValue" [readonly]="true" [cancel]="false" [stars]="5"></p-rating>
+      <span>{{ reviewSummaryResponse?.totalReviews }} recensioni</span>
+    </div>
+    <div class="d-grid mt-2">
+      @if (value5stars.length) {
+        <div class="d-flex align-items-center">
+          <span class="mr-1">5</span>
+          <p-meterGroup [value]="value5stars"/>
+          <span class="ml-1">{{ value5stars[0].value | number:'1.0-0' }}%</span>
+        </div>
+      }
+
+      @if (value4stars.length) {
+        <div class="d-flex align-items-center">
+          <span class="mr-1">4</span>
+          <p-meterGroup [value]="value4stars"/>
+          <span class="ml-1">{{ value4stars[0].value | number:'1.0-0' }}%</span>
+        </div>
+      }
+
+      @if (value3stars.length) {
+        <div class="d-flex align-items-center">
+          <span class="mr-1">3</span>
+          <p-meterGroup [value]="value3stars"/>
+          <span class="ml-1">{{ value3stars[0].value | number:'1.0-0' }}%</span>
+        </div>
+      }
+
+      @if (value2stars.length) {
+        <div class="d-flex align-items-center">
+          <span class="mr-1">2</span>
+          <p-meterGroup [value]="value2stars"/>
+          <span class="ml-1">{{ value2stars[0].value | number:'1.0-0' }}%</span>
+        </div>
+      }
+
+      @if (value1stars.length) {
+        <div class="d-flex align-items-center">
+          <span class="mr-1">1</span>
+          <p-meterGroup [value]="value1stars"/>
+          <span class="ml-1">{{ value1stars[0].value | number:'1.0-0' }}%</span>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>

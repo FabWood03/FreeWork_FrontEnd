@@ -1,0 +1,72 @@
+.title-box {
+  margin: 5rem 0 4rem 12rem;
+}
+
+.card {
+  overflow-y: hidden;
+  width: 80%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.table th {
+  color: #2D404E;
+  opacity: 70%;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.table td {
+  text-align: center;
+  align-content: center;
+  width: 40%;
+  color: #2D404E;
+}
+
+.confirm-order, .confirm-order .p-button {
+  background-color: #F78A51;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+}
+
+.photo{
+  width: 280px;
+  height: 180px;
+  position: relative;
+}
+
+.fa-trash {
+  color: #2D404E;
+  cursor: pointer;
+}
+
+.fa-trash:hover {
+  color: #c80404;
+}
+
+.bottom-line, .upper-line{
+  width: auto;
+  border: 2px rgba(45, 64, 78, 0.20) solid
+}
+
+.total{
+  background-color: #F2F2F2;
+}
+
+.p-dialog {
+  width: 35vw;
+  border: #87419E 2px solid;
+  border-radius: 30px;
+}
+
+.p-dialog-content {
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.p-dialog-header {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}

@@ -1,0 +1,38 @@
+.img-div {
+  left: 0;
+  z-index: -1;
+}
+
+.img-div .image {
+  width: 40%;
+  height: 40%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.purple-box {
+  background-color: #C18ED1;
+  margin-top: 10rem;
+}
+
+.orders {
+  transform: translateY(-8rem);
+}
+
+.empty-card {
+  text-align: center;
+}
+
+.p-card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+p {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.done-button .p-button {
+  background-color: #f68d44;
+  color: white;
+}

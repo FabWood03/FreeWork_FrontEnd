@@ -1,0 +1,66 @@
+<p-card class="offer-card" [ngClass]="getOfferClass()" styleClass="offer-card mb-4">
+  <div class="d-flex align-items-center gap-2">
+    <p-avatar
+      [image]="getAvatarUrl(offer.seller.imageFolderUrl)"
+      shape="circle"></p-avatar>
+
+    <div class="d-flex justify-content-between w-100">
+
+      <div>
+    <span class="font-bold card-user" (click)="goToSellerProfile(offer.seller.id)"
+    >{{ offer.seller.name }} {{ offer.seller.surname }}</span>
+      </div>
+
+      <div class="justify-content-end">
+        @if (!isPersonalOffer) {
+          @if ((isAuctionEnd)) {
+            <p-toast/>
+            <p-confirmDialog/>
+            <i class="fa-solid fa-trophy fa-2xl cursor-pointer" (click)="confirm($event)"></i>
+          }
+        }
+        @if (isPersonalOffer) {
+          <div class="d-flex align-items-center gap-3">
+            <i class="pen-icon fa-solid fa-pen cursor-pointer" (click)="showModifyDialog()"></i>
+            <i (click)="deleteOffer()" class="fa-solid fa-trash fa-lg cursor-pointer"></i>
+          </div>
+        }
+      </div>
+
+    </div>
+
+
+  </div>
+  <p class="m-0">Prezzo proposto: {{ offer.price }} €</p>
+  <p class="m-0">Tempo di consegna: {{ offer.deliveryTimeProposed }} giorni</p>
+</p-card>
+
+<p-dialog header="Modifica la tua offerta"
+          [(visible)]="modifyOfferVisibleFlag"
+          [modal]="true"
+          [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+          [draggable]="false"
+          [resizable]="false">
+  <div class="d-flex justify-content-center">
+    <img src="../../../../assets/offer.jpeg" class="offer-image" alt="offer-image">
+  </div>
+  <p-divider/>
+  <div class="offer-form">
+    <div class="d-flex justify-content-center gap-4 mb-4 align-items-center">
+      <label for="price" class="font-semibold w-24">Prezzo proposto</label>
+      <input pInputText id="price" [(ngModel)]="price" class="price-from flex-auto rounded-3"
+             autocomplete="off"/>
+    </div>
+    <div class="d-flex justify-content-center gap-4 mb-8 align-items-center">
+      <label for="deliverytime" class="font-semibold w-24">Tempo di consegna</label>
+      <input pInputText id="deliverytime" [(ngModel)]="deliveryTime"
+             class="deliveytime-form flex-auto rounded-3" autocomplete="off"/>
+    </div>
+  </div>
+  <!-- Aggiungi (click) al pulsante Modifica -->
+  <div class="d-flex justify-content-center rounded-3">
+    <div class="done-button">
+      <p-button label="Modifica" (click)="modifyOffer()"></p-button>
+    </div>
+  </div>
+</p-dialog>

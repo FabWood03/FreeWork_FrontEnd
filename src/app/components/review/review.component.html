@@ -1,0 +1,73 @@
+<p-panel styleClass="mb-5" [toggleable]="false">
+  <ng-template pTemplate="header">
+    <div class="d-flex justify-content-between w-100">
+
+      <div class="d-flex align-items-center gap-2">
+        <div class="d-flex align-items-center gap-2" (click)="goToSellerProfile(review.user.id)">
+          <p-avatar [image]="getAvatarUrl(review.user.imageFolderUrl)" shape="circle"/>
+          <div class="card-user cursor-pointer">
+            <span class="font-bold">{{ review.user.name }} {{ review.user.surname }}</span>
+          </div>
+        </div>
+        <p-rating class="d-flex align-items-center" [(ngModel)]="review.totalRating" [readonly]="true"
+                  [cancel]="false"/>
+      </div>
+
+      <div class="d-flex align-items-center">
+
+        @if (!isReviewOwner) {
+          <i class="triangle-icon fa-solid fa-triangle-exclamation justify-content-end cursor-pointer"
+             (click)="toggleDialog(review.id)" style="color: #f78a51;"></i>
+        }
+
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    @if (review.imagesPath && review.imagesPath.length > 0) {
+      <div>
+        <p-carousel
+          [value]="getImageUrls(review.imagesPath)"
+          [numVisible]="3"
+          [circular]="true"
+          [showIndicators]="false">
+          <ng-template pTemplate="item" let-image>
+            <div class="carousel-item-container">
+              <img
+                [src]="image"
+                alt="Review Image"
+                class="carousel-image-fixed"
+                (click)="openPreview(image)"
+              />
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    }
+    <p class="m-0">{{ review.comment }}</p>
+  </ng-template>
+
+
+  <ng-template pTemplate="footer">
+    <div class="d-flex justify-content-end">
+      <span class="text-surface-500 dark:text-surface-400">{{ review.dateCreation }}</span>
+    </div>
+  </ng-template>
+</p-panel>
+
+@if (isPreviewVisible) {
+  <div class="modal-backdrop" (click)="closePreview()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <img [src]="previewImage" alt="Preview Image" class="preview-image"/>
+      <button class="close-btn" (click)="closePreview()">&#10005;</button>
+    </div>
+  </div>
+}
+
+<app-reporting
+  [visible]="visible"
+  [reviewId]="selectedReviewId"
+  (closeDialog)="visible = $event"
+  (submitReport)="handleReportSubmit($event)"
+></app-reporting>

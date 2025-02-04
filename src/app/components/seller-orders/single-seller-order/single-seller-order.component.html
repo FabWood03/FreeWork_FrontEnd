@@ -1,0 +1,62 @@
+<p-panel [toggleable]="true" [collapsed]="true">
+  <!-- Header del pannello -->
+  <ng-template pTemplate="header">
+    <div class="panel-header d-flex justify-content-between align-items-center">
+      <span class="font-bold ml-2 ticket-id">Ordine #{{ singleOrder.id }}</span>
+    </div>
+  </ng-template>
+
+  <!-- Contenuto del pannello -->
+  <div class="panel-content">
+    @for (singleProductOrder of singleOrder.orderProducts; track singleProductOrder.id) {
+      <div class="content-text ml-2">
+        <p class="font-bold">{{ singleProductOrder.productName }}</p>
+        <p>{{ singleProductOrder.descriptionForSeller }}</p>
+        <div class="d-flex align-items-baseline gap-2">
+          <i class="fa-solid fa-gift" style="color: #7A7A7A;"></i>
+          <p>{{ singleProductOrder.packageName }}</p>
+        </div>
+      </div>
+
+      @if (singleProductOrder.status === 'PENDING') {
+        <div class="d-flex gap-3">
+          <p-button class="done-button" (click)="acceptOrder(singleProductOrder.id)">Accetta</p-button>
+          <p-button class="cancel-button" (click)="refuseOrder(singleProductOrder.id)">Rifiuta</p-button>
+        </div>
+      } @else if (singleProductOrder.status === 'IN_PROGRESS') {
+        <div class="d-flex ml-2">
+          <span class="cursor-pointer" (click)="goToSingleOrderPage(singleProductOrder.id)">Apri ordine</span>
+        </div>
+      } @else if (singleProductOrder.status === 'REFUSED') {
+        <div class="d-flex ml-2">
+          <span>Ordine rifiutato</span>
+        </div>
+      } @else if (singleProductOrder.status === 'DELIVERED') {
+        <div class="d-flex ml-2">
+          <span>Ordine consegnato</span>
+        </div>
+      } @else if (singleProductOrder.status === 'DELAYED') {
+        <div class="d-flex ml-2">
+          <span>Ordine in ritardo</span>
+        </div>
+      }
+      <p-divider></p-divider>
+    }
+  </div>
+
+  <!-- Footer del pannello -->
+  <ng-template pTemplate="footer">
+    <div class="panel-footer d-flex justify-content-between align-items-center">
+      <div class="user-info d-flex align-items-center ml-2">
+        <p-avatar [image]="getAvatarUrl(singleOrder.buyerPhoto)" class="p-1"
+                  shape="circle"></p-avatar>
+        <span class="ml-2">{{ singleOrder.buyerName }} {{ singleOrder.buyerSurname }}</span>
+      </div>
+      <div class="post-date d-flex align-items-center mr-2">
+        <span>Acquistato il {{ singleOrder.purchaseDate }}</span>
+      </div>
+    </div>
+  </ng-template>
+</p-panel>
+
+<p-toast></p-toast>

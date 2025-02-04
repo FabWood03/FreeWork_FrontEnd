@@ -1,0 +1,23 @@
+.page {
+  background: #F9F9FB;
+  height: fit-content;
+}
+
+.p-card .p-card-content {
+  padding: 0.5rem;
+}
+
+.arrows {
+  cursor: pointer;
+}
+
+.lottie {
+  width: 20em;
+  height: 20em;
+  animation: bounceIn 1s ease-out;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: #87419E;
+  color: #87419E;
+}

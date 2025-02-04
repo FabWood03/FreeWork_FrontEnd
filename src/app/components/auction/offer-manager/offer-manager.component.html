@@ -1,0 +1,89 @@
+<p-card styleClass="p-0">
+  <div class="offer-header">
+    <h1 class="offer-title">Fai la tua offerta</h1>
+    <div class="offer-button">
+      <p-button (click)="showDialog()" [disabled]="!checkLoggedUser()">
+        <ng-template pTemplate="content">
+          <i class="fa-solid fa-plus"></i>
+        </ng-template>
+      </p-button>
+    </div>
+  </div>
+
+  <div>
+    <p-dialog header="Fai la tua offerta"
+              [(visible)]="visible"
+              [modal]="true"
+              [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+              [draggable]="false"
+              [resizable]="false">
+      <div class="d-flex justify-content-center">
+        <img src="../../../../assets/offer.jpeg" class="offer-image">
+      </div>
+      <p-divider/>
+      <div class="offer-form">
+        <div class="d-flex align-items-center justify-content-center gap-4 mb-4">
+          <label for="price" class="font-semibold w-24">Prezzo proposto</label>
+          <p-inputNumber
+            id="price"
+            inputId="integeronly"
+            styleClass="flex-auto rounded-3"
+            [(ngModel)]="price"/>
+        </div>
+        <div class="d-flex align-items-center justify-content-center gap-4 mb-8">
+          <label for="deliveryTime" class="font-semibold w-24">Tempo di consegna</label>
+          <p-inputNumber
+            id="deliveryTime"
+            inputId="integeronly"
+            styleClass="flex-auto rounded-3"
+            [min]="1"
+            [(ngModel)]="deliveryTime"/>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center rounded-3">
+        <div class="done-button">
+          <p-button label="Invia" (onClick)="addOffer()"></p-button>
+        </div>
+      </div>
+    </p-dialog>
+  </div>
+
+
+  @if (personalOffer) {
+    <p-divider/>
+    <p>La tua offerta corrente:</p>
+    <!-- OfferManager HTML - Modifica il binding dell'evento -->
+    <app-offer
+      [isAuctionEnd] = "isAuctionEnd"
+      [isPersonalOffer]=true
+      [offer]="personalOffer"
+      [auctionId]="auctionId"
+      (offersUpdated)="onOffersUpdated($event)"
+      (personalOfferUpdated)="handleOfferUpdated($event)"
+      (offerCreationSuccess)="offerCreationSuccess.emit()"
+      (offerDeleted)="deleteOffer($event)">
+    </app-offer>
+  } @else {
+    <ng-template>
+      <p>Nessuna offerta presente</p>
+    </ng-template>
+  }
+  <p-divider/>
+  @for (offer of offerList; track offer.id; let i = $index) {
+
+    <app-offer
+      [isAuctionEnd] = "isAuctionEnd"
+      [offer]="offer"
+      [index]="i"
+      [auctionId]="auctionId"
+      (offersUpdated)="onOffersUpdated($event)"
+      (personalOfferUpdated)="onPersonalOfferUpdated($event)"
+      (offerCreationSuccess)="offerCreationSuccess.emit()"
+      (offerDeleted)="deleteOffer($event)">
+    </app-offer>
+  } @empty {
+    <p>Nessuna offerta presente</p>
+  }
+</p-card>
+
+<p-toast></p-toast>

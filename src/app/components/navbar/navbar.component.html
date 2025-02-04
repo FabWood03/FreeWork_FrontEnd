@@ -1,0 +1,58 @@
+<div class="relative">
+  <nav class="navbar navbar-light bg-light border-bottom px-5 sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bolder" [routerLink]="['/home']">FreeWork</a>
+
+      <div class="d-flex icon-link align-items-center relative">
+        <a class="nav-link icon-wrapper mx-2" [routerLink]="['/cart']">
+          <i class="fa-solid fa-cart-shopping py-2"></i>
+        </a>
+        <a class="nav-link icon-wrapper mx-2" (click)="menu.toggle($event)">
+          <i class="fa-solid fa-user py-2"></i>
+        </a>
+
+        <p-overlayPanel #menu id="customOverlayPanel" [dismissable]="true">
+          <p-menu [model]="menuItems" styleClass="w-full md:w-15rem">
+            <ng-template pTemplate="start">
+        <span class="inline-flex align-items-center gap-1 px-2 py-2">
+            <span class="font-medium text-xl font-semibold">Free<span class="text-primary">Work</span>
+            </span>
+        </span>
+            </ng-template>
+            <ng-template pTemplate="start">
+              <button pRipple class="relative overflow-hidden w-full p-link flex align-items-center p-2 pl-3 text-color"
+                      (click)="goToProfile()">
+                <div class="d-flex align-items-center justify-content-center h-100">
+                  <div class="user-avatar d-flex align-items-center justify-content-center ">
+                    <p-avatar [image]="getAvatarUrl(userImage)" class="mr-2"
+                              shape="circle"/>
+                  </div>
+                  <div class="user-info">
+                <span class="inline-flex flex-column">
+                  <span class="font-bold">{{ userName }}</span>
+                  <span class="text-sm">{{ userRole }}</span>
+                </span>
+                  </div>
+                </div>
+              </button>
+            </ng-template>
+            <ng-template pTemplate="submenuheader" let-item>
+              <span class="text-primary font-bold">{{ item.label }}</span>
+            </ng-template>
+            <ng-template pTemplate="item" let-item>
+              @if (item.visible) {
+                <ng-container>
+                  <a pRipple class="flex align-items-center p-menuitem-link" (click)="item.command()">
+                    <span [class]="item.icon"></span>
+                    <span class="ml-2">{{ item.label }}</span>
+                  </a>
+                </ng-container>
+              }
+            </ng-template>
+          </p-menu>
+        </p-overlayPanel>
+      </div>
+    </div>
+  </nav>
+</div>
+

@@ -1,0 +1,47 @@
+.img-div {
+  position: absolute;
+  z-index: -1;
+  margin-top: 3rem;
+
+  .image {
+    width: 35%;
+    display: flex;
+    justify-self: center;
+    opacity: 10%;
+  }
+}
+
+.p-card .p-card-content {
+  padding: 0;
+}
+
+.p-card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  margin-top: -7%;
+}
+
+.auction-description {
+  color: #7A7A7A;
+}
+
+.p-button {
+  background-color: #F78A51;
+  border: none;
+}
+
+.purple-box {
+  background-color: #C18ED1;
+  margin-top: 2%;
+  height: 100%;
+}
+
+.p-dropdown{
+  width: 100%;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #2d404e;
+}

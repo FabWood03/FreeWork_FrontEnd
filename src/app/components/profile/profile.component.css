@@ -1,0 +1,197 @@
+.img-div {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+h3 {
+  color: #2D404E;
+  font-weight: bold;
+}
+
+.img-div .image {
+  width: 40%;
+  height: 40%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.pagination-div {
+  margin-bottom: 1rem;
+}
+
+.purple-box {
+  background-color: #C18ED1;
+  margin-top: 15rem;
+}
+
+.first-card {
+  width: 65%;
+  margin-top: -7rem;
+}
+
+.textarea {
+  resize: none;
+}
+
+.second-cards-block {
+  width: 33%;
+  justify-items: center;
+  margin-top: -7rem;
+}
+
+.profile-image {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  margin-top: -7rem;
+}
+
+.form-label {
+  justify-items: center;
+}
+
+.grey-written {
+  font-size: 15px;
+  font-weight: bold;
+  color: gray;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  color: #87419E;
+}
+
+.p-dropdown {
+  width: 100%;
+  border-radius: 20px;
+  background-color: #f68d44;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.p-dropdown .p-dropdown-label {
+  color: white;
+}
+
+.p-dropdown .p-dropdown-trigger {
+  background: none;
+  border: none;
+}
+
+.profile.information {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.education, .skills, .portfolio {
+  box-sizing: border-box;
+  overflow: hidden;
+  height: auto;
+}
+
+.carousel-image {
+  max-width: 400px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  display: flex;
+  justify-self: center;
+}
+
+.p-carousel {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  max-height: 150px;
+  resize: vertical;
+}
+
+.lottie {
+  width: 20em;
+  height: 20em;
+  animation: bounceIn 1s ease-out;
+}
+
+.p-dropdown-trigger {
+  color: white;
+}
+
+.fa-pen {
+  font-size: 20px;
+}
+
+.p-chip {
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.p-chip:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.reviews-container {
+  padding-right: 10px;
+  overflow-y: auto;
+}
+
+.orange-button .p-button {
+  background-color: #f68d44;
+  border: none;
+  color: white;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.p-dialog .p-dialog-footer {
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.fa-pen:hover, .fa-pen:active, .icon {
+  color: #f68d44;
+  text-shadow: #7A7A7A 1px 1px 1px;
+}
+
+.p-card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+}
+
+.third-card .p-card {
+  overflow-y: auto;
+  max-height: 1198px;
+}
+
+.p-carousel-items-container{
+  align-items: center;
+}
+
+.file-upload-overlay {
+  position: absolute;
+  display: flex;
+  background: rgba(165, 165, 165, 0.7);
+  border: 2px solid rgba(165, 165, 165, 0.7);
+  border-radius: 50%;
+  z-index: 10;
+  height: 150px;
+  width: 150px;
+  margin-top: -9.4rem;
+}

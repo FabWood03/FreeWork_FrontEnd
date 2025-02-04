@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+
+<div class="page p-4">
+
+  <h1>Ordini Ricevuti</h1>
+  <p-card>
+
+    <div class="filter-div d-flex justify-content-between align-items-center p-3">
+      <div class="mb-3">
+        <p-iconField iconPosition="left">
+          <p-inputIcon styleClass="pi pi-search"/>
+          <input type="text" class="searchbar rounded-4" pInputText [(ngModel)]="searchText" placeholder="Cerca"
+                 (input)="filterOrdersByDateRange()"/>
+        </p-iconField>
+      </div>
+
+      <div class="time">
+        <p-dropdown
+          [options]="timeRanges"
+          [(ngModel)]="selectedTimeRange"
+          [checkmark]="true"
+          optionLabel="label"
+          [showClear]="true"
+          placeholder="Intervallo di tempo"
+          (onChange)="filterOrdersByDateRange()">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <p-tabView>
+      <p-tabPanel header="Tutti gli ordini">
+        @for (order of allOrders; track order.id) {
+          <app-single-seller-order [singleOrder]="order"></app-single-seller-order>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyOrders" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ordini disponibili.</p>
+          </div>
+        }
+      </p-tabPanel>
+      <p-tabPanel header="In attesa">
+        @for (pendingOrder of pendingOrders; track pendingOrder.id) {
+          <app-single-seller-order [singleOrder]="pendingOrder"></app-single-seller-order>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyOrders" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ordini in attesa disponibili.</p>
+          </div>
+        }
+      </p-tabPanel>
+      <p-tabPanel header="In elaborazione">
+        @for (takeOnOrder of takeOnOrders; track takeOnOrder.id) {
+          <app-single-seller-order [singleOrder]="takeOnOrder"></app-single-seller-order>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyOrders" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ordini in elaborazione disponibili.</p>
+          </div>
+        }
+      </p-tabPanel>
+      <p-tabPanel header="In ritardo">
+        @for (delayOrder of delayedOrders; track delayOrder.id) {
+          <app-single-seller-order [singleOrder]="delayOrder"></app-single-seller-order>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyOrders" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ordini in ritardo disponibili.</p>
+          </div>
+        }
+      </p-tabPanel>
+      <p-tabPanel header="Consegnati">
+        @for (deliveredOrder of deliveredOrders; track deliveredOrder.id) {
+          <app-single-seller-order [singleOrder]="deliveredOrder"></app-single-seller-order>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyOrders" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ordini consegnati disponibili.</p>
+          </div>
+        }
+      </p-tabPanel>
+      <p-tabPanel header="Rifiutati">
+        @for (refusedOrder of refusedOrders; track refusedOrder.id) {
+          <app-single-seller-order [singleOrder]="refusedOrder"></app-single-seller-order>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyOrders" width="30" height="30"></ng-lottie>
+            <p>Al momento non sono presenti ordini rifiutati disponibili.</p>
+          </div>
+        }
+      </p-tabPanel>
+    </p-tabView>
+  </p-card>
+</div>
+
+

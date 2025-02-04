@@ -1,0 +1,497 @@
+<app-navbar></app-navbar>
+
+<div class="img-div mt-2">
+  <img src="../../../../assets/modifyProfile.jpeg" class="image" alt="ModifyProfileImage">
+</div>
+
+<div class="p-4 ml-4 mt-5">
+  <h1>Ciao {{ userData.name }} {{ userData.surname }}!</h1>
+</div>
+
+
+<div class="purple-box">
+
+  <div class="d-flex p-4 justify-content-between">
+
+    <div class="first-card">
+      <p-card>
+        <div class="flex align-items-center justify-content-between">
+          <span class="title">Account</span>
+          <i (click)="isModifyMode = !isModifyMode" class="fa-solid fa-pen mr-5 cursor-pointer"></i>
+        </div>
+        <p-divider></p-divider>
+
+        <span class="grey-written">DATI PERSONALI</span>
+        <div class="d-flex flex-column mx-4 my-4">
+          <div class="d-flex justify-content-start gap-5">
+            <div class="flex flex-column gap-2 w-25">
+              <h3>Nome</h3>
+              <input
+                pInputText
+                id="name"
+                variant="filled"
+                placeholder="Inserisci il tuo nome"
+                [disabled]="!isModifyMode"
+                [(ngModel)]="userData.name"
+                class="pagination-div"/>
+            </div>
+
+            <div class="flex flex-column gap-2 w-25">
+              <h3>Cognome</h3>
+              <input
+                pInputText
+                id="surname"
+                variant="filled"
+                placeholder="Inserisci il tuo cognome"
+                [disabled]="!isModifyMode"
+                [(ngModel)]="userData.surname"
+                class="pagination-div"/>
+            </div>
+
+            <div class="flex flex-column gap-2 w-25">
+              <h3>Username</h3>
+              <input
+                pInputText
+                id="username"
+                variant="filled"
+                placeholder="Inserisci il tuo username"
+                [disabled]="!isModifyMode"
+                [(ngModel)]="userData.nickname"
+                class="pagination-div"/>
+            </div>
+          </div>
+
+
+          <div class="d-flex justify-content-start gap-5">
+            @if (userIsSeller()) {
+              <div class="flex flex-column gap-2 w-25">
+                <h3>Data di nascita</h3>
+                <p-calendar id="birthdate"
+                            class="pagination-div d-inline-grid"
+                            [dateFormat]="'dd-mm-yy'"
+                            [maxDate]="maxDate"
+                            [showTime]="false"
+                            [(ngModel)]="userData.birthDate"
+                            [disabled]="!isModifyMode"
+                            variant="filled"
+                            placeholder="Inserisci la tua data di nascita">
+                </p-calendar>
+              </div>
+            }
+
+            <div class="flex flex-column gap-2 w-25">
+              <h3>Email</h3>
+              <input
+                pInputText
+                id="email"
+                placeholder="Inserisci la tua email"
+                variant="filled"
+                [disabled]="true"
+                [(ngModel)]="userData.email"
+                class="pagination-div"/>
+            </div>
+
+            @if (userData.role === 'SELLER') {
+              <div class="flex flex-column gap-2 w-25">
+                <h3>Codice fiscale</h3>
+                <input
+                  pInputText
+                  placeholder="Inserisci il tuo codice fiscale"
+                  id="fiscal_code"
+                  variant="filled"
+                  [disabled]="true"
+                  [(ngModel)]="userData.fiscalCode"
+                  class="pagination-div"/>
+              </div>
+            }
+          </div>
+        </div>
+
+
+        @if (userIsSeller()) {
+          <p-divider></p-divider>
+          <div class="profile information">
+            <div class="d-flex flex-column">
+              <span class="grey-written">INFORMAZIONI DEL PROFILO</span>
+
+              <div class="p-4 d-flex flex-column">
+                <div class="education">
+                  <h3>Biografia</h3>
+                  <textarea id="description"
+                            placeholder="Inserisci la tua biografia"
+                            class="textarea pagination-div"
+                            variant="filled"
+                            rows="5"
+                            cols="30"
+                            pInputTextarea
+                            [(ngModel)]="userData.bio"
+                            [disabled]="!isModifyMode"
+                            [autoResize]="false">
+                </textarea>
+                </div>
+
+                <div class="skills">
+                  <div class="mt-4">
+                    <h3>Lingue conosciute</h3>
+                    <div class="d-flex align-items-center gap-2 my-4 flex-wrap">
+                      @for (language of userData.languages; track language; let i = $index) {
+                        <p-chip
+                          label="{{ language }}"
+                          [removable]="isModifyMode"
+                          (onRemove)="isModifyMode ? removeLanguage(i) : null">
+                        </p-chip>
+                      } @empty {
+                        <p>Non ci sono lingue conosciute</p>
+                      }
+                    </div>
+
+                    @if (isModifyMode) {
+                      <div class="d-flex gap-2 align-items-center">
+                        <input
+                          pInputText
+                          placeholder="Aggiungi lingua"
+                          [(ngModel)]="newLanguage"
+                          class="w-25"
+                        />
+                        <p-button
+                          label="Aggiungi"
+                          class="orange-button"
+                          icon="pi pi-plus"
+                          (onClick)="addLanguage()"
+                          [disabled]="!newLanguage.trim()"
+                        ></p-button>
+                      </div>
+
+                    }
+                  </div>
+
+                  <!-- Competenze -->
+                  <div class="mt-4">
+                    <h3>Competenze</h3>
+                    <div class="d-flex align-items-center gap-2 my-4 flex-wrap">
+                      @for (skills of userData.skills; track skills; let i = $index) {
+                        <p-chip
+                          label="{{ skills }}"
+                          [removable]="isModifyMode"
+                          (onRemove)="isModifyMode ? removeSkill(i) : null">
+                        </p-chip>
+
+                      } @empty {
+                        <p>Non ci sono competenze</p>
+                      }
+                    </div>
+
+                    @if (isModifyMode) {
+                      <div class="d-flex gap-2 align-items-center mb-3">
+                        <input pInputText placeholder="Aggiungi competenza" [(ngModel)]="newSkill"
+                               class="w-25"/>
+                        <p-button label="Aggiungi" class="orange-button" icon="pi pi-plus" (onClick)="addSkill()"
+                                  [disabled]="!newSkill"></p-button>
+                      </div>
+                    }
+                  </div>
+
+                  <h3>Educazione</h3>
+                  <textarea id="education"
+                            class="textarea pagination-div"
+                            variant="filled"
+                            rows="5"
+                            cols="30"
+                            placeholder="Inserisci la tua educazione"
+                            pInputTextarea
+                            [(ngModel)]="userData.education"
+                            [disabled]="!isModifyMode"
+                            [autoResize]="false">
+                  </textarea>
+                </div>
+
+                <div class="portfolio">
+                  <h3>Portfolio</h3>
+
+                  @if (userData.portfolio && userData.portfolio.length > 0) {
+                    <p-carousel [value]="getPortfolioUrls()" [numVisible]="1" [numScroll]="1" [circular]="true">
+                      <ng-template pTemplate="item" let-image>
+                        <img [src]="image" alt="Portfolio Image" class="carousel-image"/>
+                      </ng-template>
+                    </p-carousel>
+                  } @else {
+                    <p>Non ci sono immagini nel portfolio</p>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        <div class="d-flex justify-content-end gap-3">
+          @if (isModifyMode) {
+            <p-button class="orange-button" label='Modifica' pStyleClass="@next" toggleClass="p-disabled"
+                      (onClick)="updateUser()"></p-button>
+          }
+          <p-button (onClick)="confirm2($event)" label="Elimina" class="orange-button" [outlined]="true"/>
+        </div>
+      </p-card>
+    </div>
+
+    <div class="second-cards-block d-flex flex-column align-content-start">
+      <p-card class="second-card w-100">
+        <div class="d-flex flex-column justify-content-center align-items-center position-relative">
+          <!-- Avatar con sovrapposizione per l'upload -->
+          <div class="position-relative">
+            <p-avatar
+              styleClass="profile-image"
+              [image]="getAvatarUrl(userData.imageFolderUrl)"
+              shape="circle"
+              [style]="{ opacity: isModifyMode ? 0.5 : 1 }">
+            </p-avatar>
+
+            @if (isModifyMode && apiBaseUrl && userData.id) {
+              <p-fileUpload
+                [mode]="'basic'"
+                [chooseLabel]="'Scegli'"
+                [chooseIcon]="'pi pi-upload'"
+                name="profilePhoto"
+                url="https://www.primefaces.org/cdn/api/upload.php"
+                accept="image/*"
+                maxFileSize="1000000"
+                (onSelect)="onProfilePhotoSelected($event)"
+                (onClear)="onProfilePhotoCleared()"
+                [id]="fileInputId"
+                styleClass="file-upload-overlay"
+              />
+            }
+          </div>
+
+          <!-- Dettagli dell'utente -->
+          <span class="font-bold mt-1">{{ userData.name }} {{ userData.surname }}</span>
+          <span class="mb-3 font-semibold">&#64;{{ userData.nickname }}</span>
+
+          @if (userIsSeller()) {
+            <ng-container>
+              <p-rating
+                [(ngModel)]="integerStarsValue"
+                [readonly]="true"
+                [cancel]="false"
+                [stars]="5">
+              </p-rating>
+              <span>{{ userData.rating }}/5</span>
+            </ng-container>
+          }
+
+          @if (userData.role === 'SELLER') {
+            <span>{{ userData.role }}</span>
+          }
+        </div>
+      </p-card>
+
+      @if (userIsSeller() || userIsBuyer()) {
+        <p-card class="third-card w-100 mt-3">
+          <div class="card-header flex justify-content-between align-items-center">
+            <span class="title">Recensioni</span>
+            @if (userData.role === 'SELLER') {
+              <div class="custom-dropdown">
+                <p-dropdown
+                  [options]="options"
+                  filterPlaceholder="Cerca"
+                  [(ngModel)]="selectedOption"
+                  placeholder="Ricevute"
+                  (onChange)="filterReviews()"
+                  [showClear]="false"
+                  appendTo="body">
+                </p-dropdown>
+              </div>
+            }
+          </div>
+          <p-divider></p-divider>
+
+          <div class="reviews-container">
+            @for (reviews of userReviews; track reviews.id) {
+              <app-review class="review-body" [review]="reviews"></app-review>
+            } @empty {
+              <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+                <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+                @if (selectedOption === 'Ricevute') {
+                  <p>Non hai ricevuto nessuna recensione</p>
+                } @else {
+                  <p>Non hai fatto nessuna recensione</p>
+                }
+              </div>
+            }
+          </div>
+        </p-card>
+      }
+    </div>
+  </div>
+
+  <div class="p-4 d-flex flex-column gap-5">
+    @if (userIsSeller()) {
+      <p-card>
+        <div class="services-div">
+          <h1 class="title">Servizi</h1>
+          <p-divider></p-divider>
+          @if (productCards.length > 0) {
+            <div class="services">
+              <p-carousel
+                [value]="productCards"
+                [showIndicators]="false"
+                [numVisible]="5"
+                [numScroll]="1"
+                [circular]="false"
+                [responsiveOptions]="responsiveOptions"
+                autoplayInterval="8000">
+                <ng-template let-productCard pTemplate="item">
+                  <div class="auction d-flex p-3 align-items-center justify-content-center">
+                    <a (click)="goToProduct(productCard.id)">
+                      <div class="cardCarousel">
+                        <app-card [card]="productCard" cardType="OtherUserProfileCard"></app-card>
+                      </div>
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </div>
+          } @else {
+            <div class="no-items-container d-flex align-items-center">
+              <div class="d-flex flex-column align-items-center">
+                <p class="no-items-message mt-1 font-italic">Non ci sono servizi disponibili al momento</p>
+                <div class="lottieGhost">
+                  <ng-lottie class="lottie" [options]="lottieConfigGhost" width="20" height="20"></ng-lottie>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </p-card>
+    }
+
+    @if (userIsSeller() || userIsBuyer()) {
+      <p-card>
+        <div class="services-div">
+          <h1 class="title">Aste aperte</h1>
+          <p-divider></p-divider>
+          <div>
+            @if (openAuctionCards.length > 0) {
+              <div class="services">
+                <p-carousel
+                  [value]="openAuctionCards"
+                  [showIndicators]="false"
+                  [numVisible]="5"
+                  [numScroll]="1"
+                  [circular]="false"
+                  [responsiveOptions]="responsiveOptions"
+                  autoplayInterval="8000">
+                  <ng-template let-auctionCard pTemplate="item">
+                    <div class="auction d-flex p-3 align-items-center justify-content-center">
+                      <a (click)="goToAuction(auctionCard.id)">
+                        <div class="cardCarousel">
+                          <app-card [card]="auctionCard"
+                                    cardType="OtherUserProfileAuctionCard"></app-card>
+                        </div>
+                      </a>
+                    </div>
+                  </ng-template>
+                </p-carousel>
+              </div>
+            } @else {
+              <div class="no-items-container d-flex align-items-center">
+                <div class="d-flex flex-column align-items-center">
+                  <p class="no-items-message mt-1 font-italic">Non ci sono aste disponibili al momento</p>
+                  <div class="lottieGhost">
+                    <ng-lottie class="lottie" [options]="lottieConfigGhost" width="20" height="20"></ng-lottie>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </p-card>
+    }
+
+    @if (userIsSeller() || userIsBuyer()) {
+      <p-card>
+        <div class="services-div">
+          <h1 class="title">Aste future</h1>
+          <p-divider></p-divider>
+          <div>
+            @if (pendingAuctions.length > 0) {
+              <div class="services">
+                <p-carousel
+                  [value]="pendingAuctions"
+                  [showIndicators]="false"
+                  [numVisible]="5"
+                  [numScroll]="1"
+                  [circular]="false"
+                  [responsiveOptions]="responsiveOptions"
+                  autoplayInterval="8000">
+                  <ng-template let-auctionCard pTemplate="item">
+                    <div class="auction d-flex p-3 align-items-center justify-content-center">
+                      <a (click)="goToAuction(auctionCard.id)">
+                        <div class="cardCarousel">
+                          <app-card [card]="auctionCard"
+                                    cardType="OtherUserProfileAuctionCard"></app-card>
+                        </div>
+                      </a>
+                    </div>
+                  </ng-template>
+                </p-carousel>
+              </div>
+            } @else {
+              <div class="no-items-container d-flex align-items-center">
+                <div class="d-flex flex-column align-items-center">
+                  <p class="no-items-message mt-1 font-italic">Non ci sono aste disponibili al momento</p>
+                  <div class="lottieGhost">
+                    <ng-lottie class="lottie" [options]="lottieConfigGhost" width="20" height="20"></ng-lottie>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </p-card>
+    }
+
+    @if (userIsSeller() || userIsBuyer()) {
+      <p-card>
+        <div class="services-div">
+          <h1 class="title">Aste chiuse</h1>
+          <p-divider></p-divider>
+          <div>
+            @if (closedAuctionCards.length > 0) {
+              <div class="services">
+                <p-carousel
+                  [value]="closedAuctionCards"
+                  [showIndicators]="false"
+                  [numVisible]="5"
+                  [numScroll]="1"
+                  [circular]="false"
+                  [responsiveOptions]="responsiveOptions"
+                  autoplayInterval="8000">
+                  <ng-template let-auctionCard pTemplate="item">
+                    <div class="auction d-flex p-3 align-items-center justify-content-center">
+                      <a (click)="goToAuction(auctionCard.id)">
+                        <div class="cardCarousel">
+                          <app-card [card]="auctionCard"
+                                    cardType="OtherUserProfileAuctionCard"></app-card>
+                        </div>
+                      </a>
+                    </div>
+                  </ng-template>
+                </p-carousel>
+              </div>
+            } @else {
+              <div class="no-items-container d-flex align-items-center">
+                <div class="d-flex flex-column align-items-center">
+                  <p class="no-items-message mt-1 font-italic">Non ci sono aste disponibili al momento</p>
+                  <div class="lottieGhost">
+                    <ng-lottie class="lottie" [options]="lottieConfigGhost" width="20" height="20"></ng-lottie>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </p-card>
+    }
+  </div>
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+</div>

@@ -1,0 +1,14 @@
+<form [formGroup]="formGroup">
+  <p-autoComplete
+    styleClass="w-100"
+    formControlName="selectedService"
+    [placeholder]="'Cerca il tuo servizio ideale...'"
+    [minLength]="2"
+    [delay]="400"
+    [autoHighlight]="true"
+    optionLabel="name"
+    (keydown)="onKeydown($event)"
+    (completeMethod)="search($event)"
+    [suggestions]="suggestions"
+  ></p-autoComplete>
+</form>

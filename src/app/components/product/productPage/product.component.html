@@ -1,0 +1,114 @@
+<app-navbar></app-navbar>
+<p-toast></p-toast>
+
+<div class="page">
+@if (!isLoading) {
+  <div class="page d-flex p-5">
+    <div class="w-100 product-title">
+      <h1>{{ productData.title }}</h1>
+
+      <div class="user-profile d-flex mt-4 justify-content-start align-items-center">
+        <img (click)="goToSellerProfile(productData.user.id)"
+          [src]="productData.user.imageFolderUrl ? apiBaseUrl + productData.user.imageFolderUrl : apiBaseUrl + 'defaultProfileImage.png'"
+          alt="Immagine utente"
+          class="user-image gotoProfile" height="667" width="1000">
+        <div class="flex-column justify-content-center align-items-center ms-1">
+          <p class="fw-semibold mb-0 gotoProfile-text" (click)="goToSellerProfile(productData.user.id)">{{ productData.user.name }} {{ productData.user.surname }}</p>
+          <p-rating [(ngModel)]="integerStarsValue" [readonly]="true" [cancel]="false" [stars]="5"></p-rating>
+          <span class="ms-3">{{ productData.user.rating | number:'1.2-2' }}/5</span>
+        </div>
+      </div>
+
+      <div class="w-75 mt-4">
+        <p-galleria
+          [value]="images"
+          [showItemNavigators]="true"
+          [showItemNavigatorsOnHover]="true"
+          [showThumbnails]="false"
+          [showThumbnailNavigators]="true">
+          <ng-template pTemplate="item" let-item>
+            <div class="gallery-item">
+              <img [src]="item.itemImageSrc" alt="{{ item.alt }}" />
+            </div>
+          </ng-template>
+        </p-galleria>
+      </div>
+
+
+      <div class="mt-5">
+        <div class="d-flex gap-3">
+        <h2 class="description">Informazioni del servizio</h2>
+          @if (!isProductOwner) {
+            <i class="triangle-icon fa-solid fa-triangle-exclamation cursor-pointer mt-1"
+               (click)="toggleDialog()" style="color: #f78a51;"></i>
+          }
+        </div>
+        <p class="product-description w-75">
+          {{ productData.description }}
+        </p>
+      </div>
+
+      @if (productData.id) {
+        <app-review-summary [productId]="productData.id"></app-review-summary>
+      }
+
+      <div class="review mt-5">
+        @for (review of reviewPagination.reviews; track review.id) {
+          <app-review [review]="review"></app-review>
+        } @empty {
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+            <ng-lottie class="lottie" [options]="lottieConfigEmptyReview" width="30" height="30"></ng-lottie>
+            <p>Non ci sono recensioni per questo prodotto</p>
+          </div>
+        }
+      </div>
+
+      <!-- Segnaposto per il caricamento automatico -->
+      @if (reviewPagination.hasMoreReviews) {
+        <div #loadMoreTrigger class="load-more-trigger"></div>
+      }
+    </div>
+
+
+    <!--PARTE DEI GIGS-->
+    <div class="gigs d-flex justify-content-center">
+      <div class="card package-card rounded-4 h-fit">
+        <p-tabView class="package-tabs" [(activeIndex)]="activeIndex">
+          <p-tabPanel header="Base" class="">
+            <app-package-details [productOwnerEmail]="productData.user.email" [productId]="productData.id"
+                                 [productPackage]="productData.packages![activeIndex]"></app-package-details>
+          </p-tabPanel>
+          <p-tabPanel header="Premium">
+            <ng-template pTemplate="content">
+              <app-package-details [productOwnerEmail]="productData.user.email" [productId]="productData.id"
+                                   [productPackage]="productData.packages![activeIndex]"></app-package-details>
+            </ng-template>
+          </p-tabPanel>
+          <p-tabPanel header="Deluxe">
+            <ng-template pTemplate="content">
+              <app-package-details [productOwnerEmail]="productData.user.email" [productId]="productData.id"
+                                   [productPackage]="productData.packages![activeIndex]"></app-package-details>
+            </ng-template>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+
+  <app-reporting
+    [visible]="visible"
+    [productId]="productData.id"
+    (closeDialog)="visible = $event"
+    (submitProduct)="handleProductSubmit($event)"
+  ></app-reporting>
+} @else if (isLoading) {
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <ng-lottie class="lottie" [options]="lottieConfigLoadingPage" width="60" height="60"></ng-lottie>
+    <span class="visually-hidden">Loading...</span>
+  </div>
+}
+</div>
+
+
+
+

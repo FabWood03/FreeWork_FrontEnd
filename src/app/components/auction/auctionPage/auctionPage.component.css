@@ -1,0 +1,306 @@
+.img-div {
+  margin-top: -6rem;
+  position: absolute;
+  z-index: -1;
+  display: flex;
+  width: 95vw;
+
+  .image {
+    width: 50vw;
+    margin: 0 auto;
+    opacity: 30%;
+  }
+}
+
+.subtitle {
+  font-size: 22px;
+  font-weight: bold;
+  color: gray;
+  margin-top: 2%;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.description {
+  flex: 2;
+  margin-right: 1rem;
+}
+
+.info {
+  flex: 1;
+  text-align: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 11vh;
+  height: 11vh;
+  border-radius: 50%;
+  margin-right: 1rem;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 7px;
+}
+
+.details p {
+  margin: 0.25rem 0;
+}
+
+.second-block {
+  background-color: #C18ED1;
+}
+
+.p-card .p-card-content {
+  padding: 0;
+}
+
+.offer-image {
+  display: flex;
+  width: 50%;
+}
+
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.lottieHourglass {
+  width: 3em;
+  height: 3em;
+}
+
+.p-dialog-content {
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.p-dialog-header {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.offer-button .p-button {
+  background-color: #87419E;
+}
+
+.p-button:focus {
+  box-shadow: 0 0 10px rgba(135, 65, 158, 0.8); /* Aggiunge un'ombra viola */
+}
+
+.done-button .p-button {
+  background-color: #87419E;
+  border-radius: 1rem;
+}
+
+.p-card .p-button {
+  display: flex;
+  justify-self: end;
+  border: none;
+}
+
+.p-dialog {
+  width: 35vw;
+  border: #87419E 2px solid;
+  border-radius: 30px;
+}
+
+.title-rules-div .p-button {
+  border: none;
+}
+
+.popup-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+}
+
+/* Contenuto del popup */
+.popup-content {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  width: 600px;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0);
+}
+
+.popup-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.popup-description {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  margin-top: 0;
+}
+
+.subscription-form {
+  margin-top: 20px;
+}
+
+.subscription-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.subscription-description {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.subscribe-btn .p-button, .back-button .p-button {
+  font-size: 16px;
+}
+
+.subscribe-btn .p-button {
+  background-color: #f68d44;
+}
+
+.back-button .p-button {
+  background-color: #7A7A7A;
+}
+
+.subscribe-btn:focus {
+  outline: none; /* Rimuove il bordo di focus */
+}
+
+.popup-content {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*new*/
+
+.custom-dialog {
+  max-width: 600px;
+}
+
+.offer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-weight: bold;
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.form-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-grid .field {
+  flex: 1;
+  min-width: 250px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.save-btn {
+  border: none;
+  background-color: #f68d44;
+}
+
+.p-confirm-dialog {
+  background-color: #f8f9fa !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.p-confirm-dialog .p-dialog-footer {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.p-confirm-dialog .p-dialog-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  font-size: 16px;
+  color: #333;
+}
+
+.p-confirm-dialog .p-confirm-dialog-icon {
+  color: #dc3545;
+}
+
+.p-confirm-dialog .p-button-danger {
+  background-color: #d9534f;
+  border-color: #d43f3a !important;
+}
+
+.p-confirm-dialog .p-button-secondary {
+  background-color: #6c757d;
+  border-color: #5a6268;
+}
+
+.p-toast {
+  z-index: 10000;
+}
+
+
+
+

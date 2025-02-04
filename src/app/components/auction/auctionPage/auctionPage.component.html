@@ -1,0 +1,243 @@
+<app-navbar></app-navbar>
+
+<p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"></p-toast>
+
+@if (auctionData) {
+  <div class="p-5">
+    <div class="img-div">
+      <img src="../../../../assets/auctionPage.jpeg" class="image" alt="auctionImage">
+    </div>
+
+    <div class="title-rules-div d-flex justify-content-between">
+      <h1>{{ auctionData.title }}</h1>
+      <app-rules></app-rules>
+    </div>
+    <h3 class="subtitle">FINE ASTA TRA</h3>
+    <div class="d-flex justify-content-start">
+      <app-countdown [startDate]="auctionData.startAuctionDate" [endDate]="auctionData.endAuctionDate"></app-countdown>
+    </div>
+  </div>
+
+  <div class="p-5 prova">
+    <p-card class="header">
+      <div class="d-flex">
+        <h1>Servizi</h1>
+      </div>
+      <p-divider/>
+      <div class="content">
+        <div class="description">
+          <h4>Descrizione</h4>
+          <p>{{ auctionData.description }}</p>
+        </div>
+
+        <div class="info">
+          <div class="profile">
+            <img (click)="goToSellerProfile(auctionData.user.id)"
+                 [src]="auctionData.user.imageFolderUrl ? apiBaseUrl + auctionData.user.imageFolderUrl : apiBaseUrl + 'defaultProfileImage.png'"
+                 alt="Immagine utente" class="gotoProfile avatar"/>
+            <h5 (click)="goToSellerProfile(auctionData.user.id)"
+                class="gotoProfile-text"> {{ auctionData.user.name }} {{ auctionData.user.surname }} </h5>
+            <p (click)="goToSellerProfile(auctionData.user.id)" class="gotoProfile-text">
+              &#64;{{ auctionData.user.nickname }} </p>
+          </div>
+          <div class="details">
+            <p><strong>Macro Categoria:</strong> {{ auctionData.macroCategory.name }} </p>
+            <p><strong>Sotto Categoria:</strong> {{ auctionData.subCategory.name }} </p>
+            <p><strong>Scadenza Indicativa:</strong> {{ auctionData.deliveryDate }} giorni</p>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <div class="second-block p-5 gap-3">
+
+    <!-- Contenitore per il card Offerte-->
+    <div class="w-100 offer-card-container">
+      <app-offer-manager
+        [isAuctionEnd]="isAuctionEnd"
+        [auctionStartDate]="auctionData.startAuctionDate"
+        [auctionEndDate]="auctionData.endAuctionDate"
+        [auctionId]="auctionData.id"
+        [auctionOwnerEmail]="auctionData.user.email"
+        [offerList]="offerList"
+        [personalOffer]="personalOffer"
+        (offerDelete)="onOfferDeleteSuccess()"
+        (offersUpdated)="onOffersUpdated($event)"
+        (personalOfferUpdated)="onPersonalOfferUpdated($event)"
+        (offerCreationSuccess)="onOfferCreationSuccess()">
+      </app-offer-manager>
+    </div>
+  </div>
+
+  @if (checkAuctionPendingAndIsNotOwner()) {
+    <div class="popup-overlay">
+      <div class="popup-content">
+        <h2 class="popup-title">La data di inizio dell'asta non è ancora arrivata!</h2>
+        <p class="popup-description">Attendi che l'asta inizi per visualizzare le informazioni.</p>
+
+        <!-- Sezione per l'iscrizione alla newsletter -->
+        <div class="subscription-form">
+          <h4 class="subscription-title">Iscriviti per rimanere aggiornato!</h4>
+          <p class="subscription-description">Ricevi notifiche quando l'asta inizierà.</p>
+
+          <div class="d-flex justify-content-center gap-3">
+            <p-button class="back-button" (click)="goToHome()">Indietro</p-button>
+            <p-button (click)="subscribeUserAuction()" class="subscribe-btn">Iscriviti</p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else if (!isWinnerAssigned && checkAuctionEndAndOwner()) {
+    <div class="popup-overlay">
+      <div class="popup-content">
+        <h2 class="popup-title">L'asta si è conclusa!</h2>
+        <p class="popup-description">
+          L'asta è terminata con successo. Esamina i dettagli e le offerte ricevute,
+          quindi assegna il vincitore all'offerta migliore.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3">
+          <p-button class="back-button" (click)="goToProfile()">Torna al profilo</p-button>
+          <p-button class="subscribe-btn" (click)="assignWinner()">Assegna il vincitore</p-button>
+        </div>
+      </div>
+    </div>
+  } @else if (checkAuctionPendingAndOwner() && isPopupVisible) {
+    <div class="popup-overlay">
+      <div class="popup-content">
+        <h2 class="popup-title">L'asta non è ancora iniziata</h2>
+        <p class="popup-description">
+          L'asta è ancora in attesa di avvio. Puoi modificare i dettagli prima dell'inizio
+          per aggiornare le informazioni o apportare eventuali cambiamenti.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3">
+          <p-button class="back-button" (click)="goToProfile()">Torna al profilo</p-button>
+          <p-button (click)="hidePopupAndShowDialog()" class="subscribe-btn">Modifica asta</p-button>
+          <p-button (onClick)="auctionDeleteConfirm($event)" severity="danger">Elimina asta</p-button>
+
+        </div>
+      </div>
+    </div>
+  }
+
+
+  <p-dialog header="Modifica la tua asta"
+            [(visible)]="modifyOfferVisibleFlag"
+            (onHide)="goToProfile()"
+            [modal]="true"
+            [breakpoints]="{ '1199px': '60vw', '575px': '90vw' }"
+            [draggable]="false"
+            [resizable]="false"
+            class="custom-dialog">
+
+    <p-divider/>
+    <div class="offer-form" [formGroup]="auctionForm">
+      <!-- Titolo e Descrizione -->
+      <div class="field">
+        <label for="title">Titolo Asta *</label>
+        <input id="title" type="text" pInputText formControlName="title" placeholder="Inserisci il titolo"
+               variant="filled" class="input-area mb-3"/>
+      </div>
+
+      <div class="field">
+        <label for="description">Descrizione *</label>
+        <textarea id="description" class="textarea" rows="4" pInputTextarea formControlName="description"
+                  variant="filled" maxlength="1000" required></textarea>
+      </div>
+
+      <div class="form-grid">
+        <!-- Macrocategoria -->
+        <div class="field">
+          <label for="macroCategory">Macrocategoria *</label>
+          <p-dropdown id="macroCategory"
+                      filterPlaceholder="Selenziona una macrocategoria"
+                      emptyFilterMessage="Nessuna macrocategoria trovata"
+                      class="w-50 mb-3"
+                      variant="filled"
+                      [options]="categories"
+                      formControlName="macroCategory"
+                      optionLabel="label"
+                      [filter]="true"
+                      filterBy="label"
+                      [showClear]="true"
+                      placeholder="Seleziona la macrocategoria"
+                      (onChange)="onMacroCategoryChange($event.value)">
+          </p-dropdown>
+        </div>
+
+        <!-- Sottocategoria -->
+        <div class="field">
+          <label for="subCategory">Sottocategoria *</label>
+          <p-dropdown id="subCategory"
+                      emptyFilterMessage="Nessuna sottocategoria trovata"
+                      class="w-50 mb-3"
+                      variant="filled"
+                      [options]="filteredSubCategories"
+                      formControlName="subCategory"
+                      optionLabel="name"
+                      [filter]="true"
+                      filterBy="name"
+                      [showClear]="true"
+                      placeholder="Seleziona la sottocategoria">
+          </p-dropdown>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <!-- Scadenza Indicativa -->
+        <div class="field">
+          <label for="deliveryDate">Scadenza Indicativa (giorni) *</label>
+          <input id="deliveryDate" type="number" pInputText formControlName="deliveryDate" variant="filled"
+                 min="1" required/>
+        </div>
+
+        <!-- Data Inizio Asta -->
+        <div class="field">
+          <label for="startAuctionDate">Data Inizio Asta *</label>
+          <p-calendar id="startAuctionDate"
+                      formControlName="startAuctionDate"
+                      [dateFormat]="'dd/mm/yy'"
+                      [minDate]="minStartDate"
+                      [showTime]="true"
+                      [hourFormat]="'24'"
+                      variant="filled"
+                      placeholder="Seleziona la data e l'ora di inizio"
+                      (onSelect)="onStartDateSelect($event)">
+          </p-calendar>
+        </div>
+
+        <!-- Data Fine Asta -->
+        <div class="field">
+          <label for="endAuctionDate">Data Fine Asta *</label>
+          <p-calendar
+            id="endAuctionDate"
+            formControlName="endAuctionDate"
+            [dateFormat]="'dd/mm/yy'"
+            [minDate]="minEndDate"
+            [showTime]="true"
+            [hourFormat]="'24'"
+            variant="filled"
+            placeholder="Seleziona la data e l'ora di fine">
+          </p-calendar>
+        </div>
+      </div>
+    </div>
+
+    <p-divider/>
+
+    <!-- Pulsante di salvataggio -->
+    <div class="button-container">
+      <p-button label="Salva Modifiche" styleClass="save-btn" (click)="saveAuctionChanges()"></p-button>
+    </div>
+  </p-dialog>
+
+  <p-toast/>
+  <p-confirmDialog/>
+}
+
+
+
+
+

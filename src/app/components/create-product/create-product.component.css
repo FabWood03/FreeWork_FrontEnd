@@ -1,0 +1,152 @@
+.textarea {
+  resize: none;
+}
+
+.form-div-dx, .p-dropdown, .p-autocomplete, .input-area {
+  width: 35vw;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th, .custom-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.custom-table th {
+  background-color: #F3F4F6;
+  font-weight: bold;
+}
+
+.p-button {
+  background-color: #f68d44;
+  border-color: #f68d44;
+}
+
+.back-button-div .p-button {
+  background-color: #888888;
+  border-color: #888888;
+}
+
+.p-stepper-header:last-of-type {
+  flex: auto;
+}
+
+.p-card .p-card-content, .p-card .p-card-body {
+  padding: 0.5rem;
+}
+
+.custom-table td, .custom-table th{
+  background-color: #F3F4F6;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight, .p-checkbox-icon:hover {
+  border-color: #f68d44;
+  background-color: #f68d44;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #f68d44;
+  border-color: #f68d44;
+}
+
+.add-row-dropdown {
+  width: 2vw;
+}
+
+.no-arrow .p-dropdown-trigger {
+  display: none;
+}
+
+.add-row-dropdown .p-inputtext {
+  padding: 0.2rem;
+}
+
+/* CSS per centrare il dropdown nella colonna "SERVIZI" */
+.custom-table td {
+  text-align: center; /* Centra il contenuto delle celle */
+}
+
+.custom-table .th {
+  text-align: center; /* Centra il contenuto dell'intestazione */
+}
+
+.p-stepper .p-stepper-header.p-highlight .p-stepper-number {
+  background: #fff4d9;
+  color: #f68d44;
+  border-color: #f68d44;
+}
+
+.p-stepper .p-stepper-header:has(~ .p-highlight) .p-stepper-separator {
+  background-color: #f68d44;
+}
+
+.messages-container {
+  position: absolute;
+  top: 20px; /* Puoi regolare la posizione in base alle tue esigenze */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%; /* Puoi regolare la larghezza */
+  z-index: 1000; /* Assicurati che sia sopra gli altri contenuti */
+}
+
+.img-div {
+  position: absolute;
+  z-index: -1;
+  margin-top: -2rem;
+
+  .image {
+    width: 35%;
+    display: flex;
+    justify-self: center;
+    opacity: 10%;
+  }
+}
+
+.p-card .p-card-content {
+  padding: 0;
+}
+
+.p-card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  margin-top: -7%;
+}
+
+.purple-box {
+  background-color: #C18ED1;
+  margin-top: 2%;
+  height: fit-content;
+}
+
+.auction-description {
+  color: #7A7A7A;
+}
+
+h3{
+  color: #2d404e;
+  font-weight: bold;
+}
+
+.p-table {
+  margin-top: 50px;
+}
+
+.table-card .p-card{
+  background-color: #F3F4F6;
+  margin-top: 1%;
+}
+
+.form-control{
+  border-radius: 15px;
+  border-color: #d1d5db;
+}
+
+.fa-trash:hover {
+  color: #c80404;
+}

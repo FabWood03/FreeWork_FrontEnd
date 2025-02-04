@@ -1,0 +1,193 @@
+<app-navbar></app-navbar>
+
+<div class="img-div">
+  <img src="../../../../assets/shop.png" class="image" alt="createProductImage">
+</div>
+
+<div class="p-5">
+  <div class="mb-5">
+    <h1>Aggiungi un servizio</h1>
+    <p class="auction-description font-semibold w-50">Descrivi il tuo servizio in modo chiaro e accattivante. Spiega
+      cosa offri, come risolvi i problemi dei tuoi clienti e cosa ti rende unico. Includi dettagli rilevanti su tempi,
+      modalità di consegna e qualsiasi informazione che possa aiutare i clienti a scegliere il tuo servizio.</p>
+  </div>
+</div>
+
+<div class="purple-box">
+  <div class="card-div p-5">
+    <p-card>
+      <p-stepper [linear]="true">
+        <p-stepperPanel header="Info Servizio">
+          <ng-template pTemplate="content" let-nextCallback="nextCallback">
+
+            <div class="form-div flex flex-column ">
+
+              <h3>Titolo *</h3>
+              <input id="title" [minLength]="25" [maxLength]="80" type="text" pInputText [(ngModel)]="product.title" placeholder="Inserisci il titolo"
+                     variant="filled" class="input-area mb-3"/>
+
+              <h3>Descrizione *</h3>
+              <textarea id="description" [minLength]="25" [maxLength]="1500" class="textarea input-area mb-3" variant="filled" rows="5" cols="30"
+                        pInputTextarea
+                        placeholder="Inserisci una descrizione" [(ngModel)]="product.description"
+                        [autoResize]="false"></textarea>
+
+              <h3>Macrocategoria *</h3>
+              <p-dropdown emptyFilterMessage="Nessuna macrocategoria trovata"
+                          class="w-50 mb-3" variant="filled" [options]="categories" [(ngModel)]="selectedMacroCategory"
+                          optionLabel="label" [filter]="true" filterBy="label" [showClear]="true"
+                          placeholder="Seleziona la macrocategoria"
+                          (onChange)="onMacroCategoryChange($event.value)"></p-dropdown>
+
+              <h3>Sottocategoria *</h3>
+              <p-dropdown emptyFilterMessage="Nessuna sottocategoria trovata"
+                          class="w-50 mb-3" variant="filled" [options]="filteredSubCategories"
+                          [(ngModel)]="selectedSubCategory" optionLabel="name" [filter]="true" filterBy="name"
+                          [showClear]="true" placeholder="Seleziona la sottocategoria"
+                          [disabled]="!selectedMacroCategory"></p-dropdown>
+
+
+              <h3>Tag *</h3>
+              <span class="p-fluid mb-3">
+                <p-autoComplete [minLength]="1" [delay]="400" styleClass="p-autocomplete" variant="filled"
+                                [(ngModel)]="selectedItems" [suggestions]="tags" [multiple]="true"
+                                (completeMethod)="searchTags($event)"
+                                emptyMessage="Nessun tag trovato"
+                                optionLabel="name" placeholder="Cerca tag" appendTo="body" [showClear]="true"/>
+              </span>
+            </div>
+
+            <div>
+              <h3>Immagini *</h3>
+              <file-picker-component (filesSelected)="onFilesSelected($event)"></file-picker-component>
+            </div>
+
+            <div class="d-flex pt-4 justify-content-end">
+              <p-button label="Avanti" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()"/>
+            </div>
+
+          </ng-template>
+        </p-stepperPanel>
+
+        <p-stepperPanel header="Pacchetti">
+          <ng-template pTemplate="content" let-prevCallback="prevCallback">
+            <div class="flex flex-column">
+              <div class="container mt-4">
+                <p-card class="table-card">
+                  <p-table [value]="rows" [tableStyle]="{'min-width': '50rem'}" class="custom-table">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="th">SERVIZI</th>
+                        <th class="th">BASE</th>
+                        <th class="th">PREMIUM</th>
+                        <th class="th">DELUXE</th>
+                        <th class="th">AZIONI</th>
+                      </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-row let-i="rowIndex">
+                      <tr>
+                        <td>
+                          @if (row.isEditable) {
+                            <input type="text" [(ngModel)]="row.servizio" class="form-control"
+                                   placeholder="Inserisci nome servizio"/>
+                          } @else {
+                            {{ row.servizio }}
+                          }
+                        </td>
+
+                        <td>
+                          @if (row.type === 'text') {
+                            <input type="text" [(ngModel)]="row.base" class="form-control"
+                                   placeholder="Inserisci testo"/>
+                          } @else if (row.type === 'checkbox') {
+                            <p-checkbox [(ngModel)]="row.base" [binary]="true"></p-checkbox>
+                          } @else if (row.type === 'decimal') {
+                            <p-inputNumber
+                              [(ngModel)]="row.base"
+                              inputId="minmaxfraction"
+                              mode="decimal"
+                              [minFractionDigits]="2"
+                              [maxFractionDigits]="5"/>
+                          } @else {
+                            <p-inputNumber
+                              inputId="integeronly"
+                              [(ngModel)]="row.base"/>
+                          }
+                        </td>
+
+                        <td>
+                          @if (row.type === 'text') {
+                            <input type="text" [(ngModel)]="row.premium" class="form-control"
+                                   placeholder="Inserisci testo"/>
+                          } @else if (row.type === 'checkbox') {
+                            <p-checkbox [(ngModel)]="row.premium" [binary]="true"></p-checkbox>
+                          } @else if (row.type === 'decimal') {
+                            <p-inputNumber
+                              [(ngModel)]="row.premium"
+                              inputId="minmaxfraction"
+                              mode="decimal"
+                              [minFractionDigits]="2"
+                              [maxFractionDigits]="5"/>
+                          } @else {
+                            <p-inputNumber
+                              inputId="integeronly"
+                              [(ngModel)]="row.premium"/>
+                          }
+                        </td>
+
+                        <td>
+                          @if (row.type === 'text') {
+                            <input type="text" [(ngModel)]="row.deluxe" class="form-control"
+                                   placeholder="Inserisci testo"/>
+                          } @else if (row.type === 'checkbox') {
+                            <p-checkbox [(ngModel)]="row.deluxe" [binary]="true"></p-checkbox>
+                          } @else if (row.type === 'decimal') {
+                            <p-inputNumber
+                              [(ngModel)]="row.deluxe"
+                              inputId="minmaxfraction"
+                              mode="decimal"
+                              [minFractionDigits]="2"
+                              [maxFractionDigits]="5"/>
+                          } @else {
+                            <p-inputNumber
+                              inputId="integeronly"
+                              [(ngModel)]="row.deluxe"/>
+                          }
+                        </td>
+
+                        <td>
+                          @if (row.isEditable) {
+                            <ng-container>
+                              <i class="fa-solid fa-trash fa-lg" (click)="deleteRow(i)"
+                                 style="cursor: pointer; color: #2d404e;"></i>
+                            </ng-container>
+                          }
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                  <p-dropdown class="add-row-dropdown m-3 d-flex no-arrow"
+                              [options]="inputTypes"
+                              [(ngModel)]="selectedInputType"
+                              optionLabel="label"
+                              placeholder="⠀+⠀"
+                              (onChange)="addRow($event)">
+                  </p-dropdown>
+                </p-card>
+              </div>
+
+              <div class="d-flex pt-4 justify-content-end">
+                <p-button class="back-button-div mr-4" label="Indietro" (onClick)="prevCallback.emit()"/>
+                <p-button label="Crea" icon="pi pi-arrow-right" iconPos="right" (onClick)="createProduct()"/>
+              </div>
+            </div>
+          </ng-template>
+        </p-stepperPanel>
+      </p-stepper>
+    </p-card>
+  </div>
+
+  <p-toast></p-toast>
+</div>

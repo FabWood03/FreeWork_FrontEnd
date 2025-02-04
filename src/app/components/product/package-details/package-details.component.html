@@ -1,0 +1,49 @@
+<p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"></p-toast>
+
+@if (productPackage) {
+  <div class="package-content">
+    <h3>€{{ productPackage.price }}</h3>
+    <p><strong>Descrizione: </strong> {{ productPackage.description }}</p>
+    <ul class="details">
+      <li><i class="fa-regular fa-clock me-2"></i>{{ productPackage.deliveryTime }} giorni</li>
+      <li><i class="fa-solid fa-rotate-right me-2"></i>{{ productPackage.revisions }} revisioni</li>
+    </ul>
+    <p>Cosa include?</p>
+    <div class="attributes-container">
+      @for (attribute of productPackage.attributes; track attribute.key) {
+        <div class="attribute">
+          <i class="fa-solid fa-check"></i>
+          <p class="attribute-key">{{ attribute.key }}:</p>
+          <p class="attribute-value">{{ attribute.value }}</p>
+        </div>
+      }
+      @if (!productPackage.attributes || productPackage.attributes.length === 0) {
+        <p>Non ci sono attributi per questo pacchetto</p>
+      }
+    </div>
+    <button [disabled]="checkLoggedUser()" class="btn btn-primary mt-3" (click)="addToCart()">Aggiungi al carrello
+    </button>
+    <div class="package-details text-center">
+      <p-dialog
+        [(visible)]="isModalVisible"
+        header="Prodotto aggiunto al carrello!"
+        [modal]="true"
+        [closable]="false"
+        [style]="{ width: '30vw' }"
+      >
+        <h4>Il prodotto è stato aggiunto al carrello! Cosa vuoi fare?</h4>
+        <div class="justify-content-center align-items-center">
+          <ng-lottie class="lottie" [options]="lottieConfigCartCheckout"></ng-lottie>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-primary mt-3 me-4" pButton type="button" label="Vai al carrello"
+                  [routerLink]="['/cart']"></button>
+          <button class="btn btn-primary mt-3" pButton type="button" label="Continua gli acquisti"
+                  (click)="continueShopping()"></button>
+        </div>
+      </p-dialog>
+    </div>
+  </div>
+}
+
+

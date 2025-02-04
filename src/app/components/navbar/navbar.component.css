@@ -1,0 +1,58 @@
+.navbar {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+}
+
+.navbar-brand {
+  color: #87419E;
+  font-size: 28px;
+}
+
+.icon-wrapper i {
+  cursor: pointer;
+  font-size: 1.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease; /* Transizione per il movimento */
+}
+
+/* Animazione al passaggio del cursore */
+.icon-wrapper i:hover {
+  transform: translateY(-6px);
+}
+
+.p-avatar {
+  display: flex;
+}
+
+.p-menu .p-menuitem > .p-menuitem-content {
+  border-radius: 15px;
+}
+
+.p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link {
+  padding: 0.75rem 0.85rem;
+  border-radius: 15px;
+
+}
+
+.p-link:hover, .p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link:hover {
+  background-color: #e6e6e6;
+  border-radius: 20px;
+}
+
+.p-menu {
+  padding: 0;
+  border: 0;
+}
+
+.p-overlaypanel {
+  margin-top: 13px;
+  border-radius: 30px;
+}
+
+.p-overlaypanel .p-overlaypanel-content {
+  padding: 0.75rem;
+}
